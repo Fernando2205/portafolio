@@ -89,6 +89,13 @@ if(sessionStorage.getItem('delio-intro')==='hecha')r.dataset.intro='off';
 
     <ParticleCanvas />
 
+    <canvas
+      data-matrix
+      class="pointer-events-none fixed top-0 left-0 z-260 h-screen w-screen opacity-0"
+      aria-hidden="true"
+    >
+    </canvas>
+
     <slot />
 
     <Footer />

@@ -44,6 +44,7 @@ function partirTitular (titular: HTMLElement): Letras {
 
       const dentro = document.createElement('span')
       dentro.style.display = 'inline-block'
+      dentro.dataset.letra = ''
       dentro.textContent = letra
 
       fuera.appendChild(dentro)

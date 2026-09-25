@@ -1,0 +1,57 @@
+---
+import { PERFIL } from '../data/perfil'
+import { getLang, t } from '../i18n/utils'
+
+const dic = t(getLang(Astro.url))
+---
+
+<section
+  id="inicio"
+  data-seccion="inicio"
+  class="relative z-1 flex min-h-screen flex-col justify-end pad-x"
+  style="padding-top:140px;padding-bottom:48px;box-sizing:border-box"
+>
+  <div
+    data-hero-fade
+    class="flex flex-wrap items-center justify-between gap-4 font-mono text-sm text-mut"
+  >
+    <div class="flex items-center gap-2.5">
+      <span class="text-acct">~ $</span>
+      <span>{dic.hero.whoami}</span>
+      <span class="animate-parpadeo text-acc" aria-hidden="true">▍</span>
+    </div>
+    <div class="flex items-center gap-2.5">
+      <span class="animate-pulso h-2 w-2 rounded-full bg-acc" aria-hidden="true"></span>
+      <span>{dic.hero.disponible}</span>
+    </div>
+  </div>
+
+  <h1 data-hero class="mt-7 text-hero" style="font-variation-settings:'wght' 300,'opsz' 96">
+    {PERFIL.nombreCorto}
+  </h1>
+
+  <div
+    data-hero-fade
+    class="mt-14 grid items-end gap-8"
+    style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))"
+  >
+    <p class="max-w-[26ch] text-tagline">{dic.hero.tagline}</p>
+
+    <div class="font-mono text-[13px] leading-[1.8] text-mut">
+      <div>{dic.hero.estudios}</div>
+      <div class="flex gap-2">
+        <span>{dic.hero.ciudad}</span>
+        <span data-reloj></span>
+      </div>
+    </div>
+
+    <a
+      href="#sobre-mi"
+      data-cursor={dic.cursor.baja}
+      class="flex items-center gap-2.5 justify-self-end font-mono text-[13px] text-mut"
+    >
+      <span>{dic.hero.desliza}</span>
+      <span class="text-acct" aria-hidden="true">↓</span>
+    </a>
+  </div>
+</section>

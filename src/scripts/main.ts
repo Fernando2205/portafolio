@@ -2,6 +2,7 @@ import { TOTAL_SECRETOS } from '../data/secretos'
 import { limpiar } from './bus'
 import { iniciarReloj } from './clock'
 import { iniciarCursor } from './cursor'
+import { iniciarHero } from './hero'
 import { iniciarLoader } from './loader'
 import { iniciarNav } from './nav'
 import { CLAVES, leerJson } from './store'
@@ -18,6 +19,18 @@ type Baja = (() => void) | void
 const bajas: Baja[] = []
 let iniciado = false
 
+/*
+  El orden importa: el loader va al final porque avisa de `introFin` en cuanto
+  arranca si la intro ya se vio, y quien lo escucha tiene que estar listo antes.
+*/
+const modulos = [
+  iniciarNav,
+  iniciarCursor,
+  iniciarReloj,
+  iniciarHero,
+  iniciarLoader
+]
+
 function iniciar () {
   if (iniciado) return
   iniciado = true
@@ -25,10 +38,7 @@ function iniciar () {
   const secretos = leerJson<string[]>(CLAVES.secretos, [])
   inicializarTema(secretos.length, TOTAL_SECRETOS)
 
-  bajas.push(iniciarNav())
-  bajas.push(iniciarLoader())
-  bajas.push(iniciarReloj())
-  bajas.push(iniciarCursor())
+  for (const modulo of modulos) bajas.push(modulo())
 }
 
 function destruir () {

@@ -4,6 +4,7 @@ import { limpiar } from './bus'
 import { iniciarReloj } from './clock'
 import { iniciarCursor } from './cursor'
 import { iniciarHero } from './hero'
+import { iniciarTrayectoria } from './journey'
 import { iniciarLoader } from './loader'
 import { iniciarMarquesina } from './marquee'
 import { iniciarNav } from './nav'
@@ -33,6 +34,7 @@ const modulos = [
   iniciarHero,
   iniciarMarquesina,
   iniciarSobre,
+  iniciarTrayectoria,
   iniciarScroll,
   iniciarLoader
 ]

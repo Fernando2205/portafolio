@@ -1,0 +1,131 @@
+---
+import {
+  ETIQUETAS_TIPO,
+  TIPOS_TRAYECTORIA,
+  TRAYECTORIA,
+  porTipo
+} from '../data/trayectoria'
+import { getLang, t } from '../i18n/utils'
+
+const lang = getLang(Astro.url)
+const dic = t(lang)
+
+/*
+  Se renderizan los tres grupos y el filtro lo hace CSS a partir de
+  `data-filtro`: así no hay parpadeo al cargar, el contenido completo está en
+  el HTML para SEO y sin JavaScript se ven todos los items.
+*/
+const FILTRO_INICIAL = 'work'
+
+const columnaNodo = 'calc(clamp(72px,12vw,140px) + clamp(16px,3vw,40px) + 7px)'
+---
+
+<section id="trayectoria" class="relative z-1 border-t border-line pad-x pad-y">
+  <div class="mb-12 flex flex-wrap items-end justify-between gap-6">
+    <div class="flex flex-col gap-4">
+      <div data-scramble class="font-mono text-[13px] text-mut">{dic.trayectoria.etiqueta}</div>
+      <div class="overflow-hidden pb-[.1em]">
+        <h2 data-h class="text-h2">{dic.trayectoria.titulo}</h2>
+      </div>
+    </div>
+
+    <div data-reveal class="flex flex-wrap gap-2" role="tablist">
+      {
+        TIPOS_TRAYECTORIA.map(tipo => (
+          <button
+            type="button"
+            role="tab"
+            data-pestana={tipo}
+            aria-selected={tipo === FILTRO_INICIAL ? 'true' : 'false'}
+            class="flex cursor-pointer items-baseline gap-2 rounded-full border border-line px-4 py-2.5 font-mono text-[13px] transition-[background-color,color] duration-250 aria-selected:bg-fg aria-selected:text-bg not-aria-selected:bg-transparent not-aria-selected:text-mut"
+          >
+            <span>{ETIQUETAS_TIPO[tipo][lang]}</span>
+            <span class="text-[11px] opacity-60">
+              {String(porTipo(tipo).length).padStart(2, '0')}
+            </span>
+          </button>
+        ))
+      }
+    </div>
+  </div>
+
+  <div data-tl data-filtro={FILTRO_INICIAL} class="relative max-w-[1100px]">
+    <div class="absolute top-0 bottom-0 w-px bg-line" style={`left:${columnaNodo}`}>
+      <div data-tl-relleno class="h-0 w-full bg-acc" style="box-shadow:0 0 12px var(--acc)"></div>
+    </div>
+
+    {
+      TRAYECTORIA.map((item, i) => (
+        <div
+          data-ti
+          data-tipo={item.tipo}
+          class="grid cursor-pointer py-[26px]"
+          style="grid-template-columns:clamp(72px,12vw,140px) 16px minmax(0,1fr);column-gap:clamp(16px,3vw,40px)"
+        >
+          <div class="pt-2.5 font-mono text-sm text-mut">{item.anio}</div>
+
+          <div class="relative">
+            <div
+              data-nodo
+              class="absolute top-3 left-0 box-border h-[15px] w-[15px] rounded-full border border-mut bg-bg"
+              style="transition:background-color .3s,border-color .3s,transform .3s,box-shadow .3s"
+              aria-hidden="true"
+            >
+            </div>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <div class="font-mono text-xs text-acct">{ETIQUETAS_TIPO[item.tipo][lang]}</div>
+            <div class="text-[clamp(24px,3vw,40px)] leading-[1.1] tracking-[-.02em]">
+              {item.titulo}
+            </div>
+            <div class="text-[17px] text-mut">{item.subtitulo[lang]}</div>
+
+            <div
+              id={`trayectoria-panel-${i}`}
+              data-panel
+              hidden
+              class="flex max-w-[62ch] flex-col gap-2.5 pt-2.5"
+            >
+              {item.detalle[lang].map(linea => (
+                <p class="text-[17px] leading-[1.5]">{linea}</p>
+              ))}
+            </div>
+
+            <div class="flex flex-wrap items-baseline gap-x-6 gap-y-2 font-mono text-xs">
+              <button
+                type="button"
+                data-mas
+                aria-expanded="false"
+                aria-controls={`trayectoria-panel-${i}`}
+                data-cursor={dic.cursor.abrir}
+                class="cursor-pointer border-0 bg-transparent p-0 text-left font-mono text-xs text-mut"
+              >
+                {dic.trayectoria.masDetalles}
+              </button>
+
+              {item.url && (
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  data-cursor={dic.cursor.ver}
+                  class="text-acct"
+                >
+                  {`${dic.trayectoria.credencial} ↗`}
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<noscript>
+  <style>
+    [data-filtro] [data-ti] { display: grid !important; }
+    [data-panel] { display: flex !important; }
+  </style>
+</noscript>

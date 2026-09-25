@@ -180,6 +180,16 @@ html[data-tema='light'] [data-cuando-claro] {
   display: inline;
 }
 
+/*
+  Pestañas de la trayectoria. El filtro se resuelve con CSS para que no haya
+  parpadeo al cargar y para que el HTML lleve siempre los tres grupos.
+*/
+[data-filtro='work'] [data-ti]:not([data-tipo='work']),
+[data-filtro='edu'] [data-ti]:not([data-tipo='edu']),
+[data-filtro='cert'] [data-ti]:not([data-tipo='cert']) {
+  display: none;
+}
+
 /* La intro de carga solo se ve una vez por sesión. */
 html[data-intro='off'] [data-cargador] {
   display: none;

@@ -8,6 +8,7 @@ import Footer from '../components/Footer.astro'
 import ParticleCanvas from '../components/ParticleCanvas.astro'
 import Toast from '../components/Toast.astro'
 import { getLang, ruta, t } from '../i18n/utils'
+import SpeedInsights from '@vercel/speed-insights/astro'
 
 interface Props {
   /** Pon `false` para entrar directo al sitio, sin la intro de carga. */
@@ -114,6 +115,8 @@ if(sessionStorage.getItem('delio-intro')==='hecha')r.dataset.intro='off';
     <Footer />
 
     <Toast />
+
+    <SpeedInsights />
 
     <script>
       import '../scripts/main'

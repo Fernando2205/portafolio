@@ -18,6 +18,7 @@
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",
     "@fontsource/jetbrains-mono": "^5.3.0",
     "@tailwindcss/vite": "^4.3.3",
+    "@vercel/speed-insights": "^2.0.0",
     "astro": "^5.18.2",
     "gsap": "^3.15.0",
     "simple-icons": "^16.32.0",

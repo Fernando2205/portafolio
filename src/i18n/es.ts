@@ -9,6 +9,7 @@ export const es = {
   meta: {
     titulo: 'Delio Palacios · Desarrollador full stack',
     descripcion: 'Portafolio de Delio Fernando Palacios, desarrollador full stack en Cali: software web, automatizaciones con n8n y agentes de IA.',
+    imagenAlt: 'Delio Palacios, desarrollador full stack en Cali: software web, automatizaciones y agentes de IA.',
     tituloOculto: '~ $ vuelve pronto_'
   },
 

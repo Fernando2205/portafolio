@@ -24,6 +24,12 @@ const urlEn = new URL('/en/', Astro.site)
 const canonica = new URL(ruta(lang), Astro.site)
 
 /*
+  Tarjeta de vista previa al compartir el enlace, una por idioma. La URL tiene
+  que ser absoluta, así que sale de `site`: si cambias el dominio, cámbialo allí.
+*/
+const imagenOg = new URL(lang === 'es' ? '/og-image.png' : '/og-image-en.png', Astro.site)
+
+/*
   Aplica la paleta guardada antes del primer paint para que no haya parpadeo.
   Duplica a propósito el cálculo de src/scripts/theme.ts: es la única forma de
   tenerlo listo antes de que el navegador pinte. Si cambias cómo se derivan
@@ -68,9 +74,16 @@ if(sessionStorage.getItem('delio-intro')==='hecha')r.dataset.intro='off';
     <meta property="og:title" content={dic.meta.titulo} />
     <meta property="og:description" content={dic.meta.descripcion} />
     <meta property="og:url" content={canonica.href} />
+    <meta property="og:image" content={imagenOg.href} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={dic.meta.imagenAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={dic.meta.titulo} />
     <meta name="twitter:description" content={dic.meta.descripcion} />
+    <meta name="twitter:image" content={imagenOg.href} />
+    <meta name="twitter:image:alt" content={dic.meta.imagenAlt} />
 
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="alternate icon" href="/favicon.ico" sizes="32x32" />

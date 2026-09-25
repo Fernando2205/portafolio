@@ -115,10 +115,8 @@ Los huecos están marcados en el código con un comentario `pendiente`.
 - [ ] **CV actualizado** → reemplaza `public/cv/CV-Delio-Palacios.pdf`.
 - [ ] **Dominio definitivo** → `site` en
       [`astro.config.mjs`](astro.config.mjs). Hoy apunta a un `.pages.dev` de
-      ejemplo y de ahí salen el canonical, los `hreflang` y los metadatos OG.
-- [ ] **Imagen para compartir** (Open Graph). Está la etiqueta
-      `twitter:card` pero no hay `og:image`: hace falta un PNG de 1200×630 en
-      `public/` y añadir la etiqueta en `Base.astro`.
+      ejemplo y de ahí salen el canonical, los `hreflang` y la URL de la imagen
+      de Open Graph, que tiene que ser absoluta para que la tarjeta cargue.
 
 ## Despliegue
 

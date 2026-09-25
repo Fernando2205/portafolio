@@ -8,6 +8,7 @@ export const en: Diccionario = {
   meta: {
     titulo: 'Delio Palacios · Full stack developer',
     descripcion: 'Portfolio of Delio Fernando Palacios, full stack developer in Cali: web software, n8n automations and AI agents.',
+    imagenAlt: 'Delio Palacios, full stack developer in Cali: web software, automations and AI agents.',
     tituloOculto: '~ $ come back soon_'
   },
 

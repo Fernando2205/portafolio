@@ -1,0 +1,47 @@
+---
+import { getLang, t } from '../i18n/utils'
+
+const dic = t(getLang(Astro.url))
+
+/*
+  Cada fila se duplica para que el bucle sea continuo: marquee.ts mide el ancho
+  de la primera copia y envuelve el desplazamiento ahí. La segunda copia es
+  decorativa y queda fuera del árbol de accesibilidad.
+*/
+const filas = [
+  { items: dic.cinta.fila1, separador: '✦', contorno: false },
+  { items: dic.cinta.fila2, separador: '·', contorno: true }
+]
+---
+
+<section
+  class="relative z-1 flex flex-col gap-2.5 overflow-hidden border-t border-b border-line"
+  style="padding:clamp(40px,6vw,72px) 0;background:color-mix(in srgb,var(--bg) 60%,transparent)"
+>
+  {
+    filas.map((fila, indice) => (
+      <div data-cinta={indice} class="flex w-max will-change-transform">
+        {
+          [0, 1].map(copia => (
+            <div
+              class="flex gap-12 pr-12 text-cinta whitespace-nowrap"
+              style={fila.contorno ? 'color:transparent;-webkit-text-stroke:1px var(--mut)' : ''}
+              aria-hidden={copia === 1 ? 'true' : undefined}
+            >
+              {
+                fila.items.map(item => (
+                  <>
+                    <span>{item}</span>
+                    <span class={fila.contorno ? '' : 'text-acc'} aria-hidden="true">
+                      {fila.separador}
+                    </span>
+                  </>
+                ))
+              }
+            </div>
+          ))
+        }
+      </div>
+    ))
+  }
+</section>

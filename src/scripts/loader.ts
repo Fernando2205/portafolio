@@ -93,7 +93,7 @@ function montar (cargador: HTMLElement) {
 
   return () => {
     window.clearInterval(intervalo)
-    for (const salida of salidas) window.clearTimeout(salida)
+    for (const id of salidas) window.clearTimeout(id)
     cargador.removeEventListener('click', saltar)
   }
 }

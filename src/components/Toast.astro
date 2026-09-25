@@ -1,0 +1,24 @@
+---
+/*
+  Aviso de secreto desbloqueado, abajo a la izquierda. Arranca fuera de pantalla
+  y secrets.ts lo rellena y lo sube.
+*/
+---
+
+<div
+  data-toast
+  class="pointer-events-none fixed z-270 flex flex-col gap-1 rounded-[14px] bg-acc px-[18px] py-3.5 font-mono text-onacc shadow-toast"
+  style="left:clamp(16px,3vw,32px);bottom:clamp(16px,3vw,32px);transform:translateY(140%);opacity:0;transition:transform .6s cubic-bezier(.2,.9,.2,1.2),opacity .4s"
+  role="status"
+  aria-live="polite"
+>
+  <span data-toast-cabecera class="text-[11px]"></span>
+  <span data-toast-nombre class="text-base font-medium"></span>
+  <span
+    data-toast-pista
+    hidden
+    class="mt-1.5 max-w-[34ch] border-t pt-2 text-xs"
+    style="border-color:color-mix(in srgb, var(--onacc) 25%, transparent)"
+  >
+  </span>
+</div>

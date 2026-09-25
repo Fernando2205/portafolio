@@ -6,6 +6,7 @@ import { TOTAL_SECRETOS } from '../data/secretos'
 import { CLAVES } from '../scripts/store'
 import Footer from '../components/Footer.astro'
 import ParticleCanvas from '../components/ParticleCanvas.astro'
+import Toast from '../components/Toast.astro'
 import { getLang, ruta, t } from '../i18n/utils'
 
 interface Props {
@@ -91,6 +92,8 @@ if(sessionStorage.getItem('delio-intro')==='hecha')r.dataset.intro='off';
     <slot />
 
     <Footer />
+
+    <Toast />
 
     <script>
       import '../scripts/main'

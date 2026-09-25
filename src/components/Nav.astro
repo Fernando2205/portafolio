@@ -1,0 +1,113 @@
+---
+import { TOTAL_SECRETOS } from '../data/secretos'
+import { getLang, otroIdioma, ruta, t } from '../i18n/utils'
+import { CLAVES } from '../scripts/store'
+import MenuPaletas from './MenuPaletas.astro'
+
+const lang = getLang(Astro.url)
+const dic = t(lang)
+const otro = otroIdioma(lang)
+
+const enlaces = [
+  { id: 'sobre-mi', texto: dic.nav.enlaces['sobre-mi'] },
+  { id: 'trayectoria', texto: dic.nav.enlaces.trayectoria },
+  { id: 'logros', texto: dic.nav.enlaces.logros },
+  { id: 'proyectos', texto: dic.nav.enlaces.proyectos },
+  { id: 'terminal', texto: dic.nav.enlaces.terminal },
+  { id: 'contacto', texto: dic.nav.enlaces.contacto }
+]
+
+const claseBoton =
+  'cursor-pointer rounded-full border border-line bg-transparent px-3 py-1.5 font-mono text-[13px] whitespace-nowrap'
+
+/*
+  Pinta el contador de secretos antes del primer paint. Sin esto, quien ya
+  lleve secretos encontrados vería un frame con 0/8.
+*/
+const scriptContador = `(function(){try{
+var s=JSON.parse(localStorage.getItem('${CLAVES.secretos}')||'[]'),n=s.length;
+var e=document.querySelector('[data-contador-secretos]');
+if(e)e.textContent=n>=${TOTAL_SECRETOS}?'★ ${TOTAL_SECRETOS}/${TOTAL_SECRETOS}':'◆ '+n+'/${TOTAL_SECRETOS}';
+}catch(e){}})()`
+---
+
+<nav
+  class="fixed top-0 right-0 left-0 z-50 flex flex-wrap items-center justify-between gap-x-6 gap-y-3 pad-x py-4 font-mono text-[13px] backdrop-blur-[12px]"
+  style="background:color-mix(in srgb,var(--bg) 72%,transparent)"
+  aria-label={dic.nav.enlaces.terminal}
+>
+  <a href="#inicio" data-logo class="flex font-medium whitespace-nowrap">
+    <span>~/delio</span>
+    <span class="text-acct" data-ruta-seccion></span>
+    <span class="animate-parpadeo text-acc" aria-hidden="true">_</span>
+  </a>
+
+  <div class="flex flex-wrap gap-x-[clamp(14px,2.5vw,32px)] gap-y-2">
+    {
+      enlaces.map(enlace => (
+        <a href={`#${enlace.id}`} data-scramble-hover class="text-mut">{enlace.texto}</a>
+      ))
+    }
+  </div>
+
+  <div class="flex shrink-0 gap-2">
+    <button
+      type="button"
+      data-contador-secretos
+      data-cursor="???"
+      aria-label={dic.nav.secretos}
+      class={`${claseBoton} text-acct`}
+    >
+      {`◆ 0/${TOTAL_SECRETOS}`}
+    </button>
+    <script is:inline set:html={scriptContador} />
+
+    <button
+      type="button"
+      data-paletas-toggle
+      data-cursor={dic.nav.paleta}
+      aria-label={dic.nav.paleta}
+      aria-expanded="false"
+      class="flex cursor-pointer items-center gap-1 rounded-full border border-line bg-transparent px-2.5 py-1.5"
+    >
+      <span
+        class="h-2.5 w-2.5 rounded-full bg-bg"
+        style="box-shadow:0 0 0 1px var(--mut)"
+        aria-hidden="true"
+      ></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-fg" aria-hidden="true"></span>
+      <span class="h-2.5 w-2.5 rounded-full bg-acc" aria-hidden="true"></span>
+    </button>
+
+    <a
+      href={ruta(otro)}
+      data-cambiar-idioma={otro}
+      data-cursor={dic.nav.idioma}
+      class={`${claseBoton} flex gap-1.5 text-mut`}
+    >
+      <span class={lang === 'es' ? 'text-fg' : ''}>ES</span>
+      <span aria-hidden="true">/</span>
+      <span class={lang === 'en' ? 'text-fg' : ''}>EN</span>
+    </a>
+
+    <button
+      type="button"
+      data-tema-toggle
+      data-cursor={dic.nav.tema}
+      aria-label={dic.nav.tema}
+      class={`${claseBoton} px-3.5 text-fg`}
+    >
+      <span data-cuando-oscuro>{dic.nav.claro}</span>
+      <span data-cuando-claro>{dic.nav.oscuro}</span>
+    </button>
+  </div>
+
+  <div
+    data-progreso
+    class="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-acc"
+    aria-hidden="true"
+  >
+  </div>
+</nav>
+
+<MenuPaletas />

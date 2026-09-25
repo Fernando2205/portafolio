@@ -8,6 +8,8 @@ import type { NombrePaleta } from '../data/paletas'
 export interface Eventos {
   /** La intro de carga terminó (o no había). */
   introFin: void
+  /** Se hizo clic en el logo (lo cuenta eggs.ts). */
+  logo: void
   /** Cambió la sección visible. El valor es el id de la <section>. */
   seccion: string
   /** Cambió la paleta, el modo claro/oscuro o el acento. */

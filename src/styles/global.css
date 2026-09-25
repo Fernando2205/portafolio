@@ -166,6 +166,20 @@ html.vt-circulo::view-transition-new(root) {
   animation-duration: .45s;
 }
 
+/*
+  Etiquetas que dependen del modo. Se resuelven con CSS y no con JS para que no
+  parpadeen: el script inline del <head> ya dejó puesto html[data-tema].
+*/
+[data-cuando-oscuro],
+[data-cuando-claro] {
+  display: none;
+}
+
+html[data-tema='dark'] [data-cuando-oscuro],
+html[data-tema='light'] [data-cuando-claro] {
+  display: inline;
+}
+
 /* La intro de carga solo se ve una vez por sesión. */
 html[data-intro='off'] [data-cargador] {
   display: none;

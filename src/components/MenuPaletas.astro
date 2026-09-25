@@ -1,0 +1,48 @@
+---
+import { NOMBRES_PALETA, PALETAS } from '../data/paletas'
+import { getLang, t } from '../i18n/utils'
+
+const dic = t(getLang(Astro.url))
+---
+
+<div
+  data-paletas-fondo
+  hidden
+  class="fixed inset-0 z-55"
+  aria-hidden="true"
+>
+</div>
+
+<div
+  data-paletas
+  hidden
+  role="dialog"
+  aria-label={dic.nav.paleta}
+  class="fixed top-16 z-56 flex w-[min(300px,calc(100vw-40px))] flex-col gap-0.5 rounded-tarjeta border border-line bg-card p-2.5 font-mono shadow-paletas"
+  style="right:clamp(20px,5vw,64px)"
+>
+  <div class="px-2.5 pt-1.5 pb-2.5 text-[11px] text-mut">{dic.nav.paleta}</div>
+
+  {
+    NOMBRES_PALETA.map(nombre => (
+      <button
+        type="button"
+        data-paleta={nombre}
+        class="flex cursor-pointer items-center gap-3 rounded-[10px] border-0 bg-transparent px-2.5 py-2.5 text-left text-[13px] text-fg hover:bg-line"
+      >
+        <span
+          class="flex h-[22px] w-[54px] shrink-0 overflow-hidden rounded-md"
+          style='box-shadow:0 0 0 1px var(--line)'
+          data-muestra
+        >
+          <span class="flex-1" style={`background:${PALETAS[nombre].dark.bg}`}></span>
+          <span class="flex-1" style={`background:${PALETAS[nombre].dark.card}`}></span>
+          <span class="flex-1" style={`background:${PALETAS[nombre].dark.fg}`}></span>
+          <span class="flex-1" style={`background:${PALETAS[nombre].acc}`}></span>
+        </span>
+        <span class="flex-1">{nombre}</span>
+        <span class="text-acct" data-marca></span>
+      </button>
+    ))
+  }
+</div>

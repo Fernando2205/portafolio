@@ -3,6 +3,7 @@ import { limpiar } from './bus'
 import { iniciarReloj } from './clock'
 import { iniciarCursor } from './cursor'
 import { iniciarLoader } from './loader'
+import { iniciarNav } from './nav'
 import { CLAVES, leerJson } from './store'
 import { inicializarTema } from './theme'
 
@@ -24,6 +25,7 @@ function iniciar () {
   const secretos = leerJson<string[]>(CLAVES.secretos, [])
   inicializarTema(secretos.length, TOTAL_SECRETOS)
 
+  bajas.push(iniciarNav())
   bajas.push(iniciarLoader())
   bajas.push(iniciarReloj())
   bajas.push(iniciarCursor())

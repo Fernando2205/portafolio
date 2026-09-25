@@ -1,0 +1,94 @@
+---
+import { iconoDe } from '../data/iconos'
+import { STACK } from '../data/stack'
+import { getLang, t } from '../i18n/utils'
+
+const dic = t(getLang(Astro.url))
+
+/*
+  Las pastillas arrancan en flujo normal (flex wrap): physics.ts lee esas
+  posiciones iniciales y solo después las pasa a posicionamiento absoluto. Así,
+  sin JavaScript o con prefers-reduced-motion, el stack se ve como una nube de
+  etiquetas bien colocada.
+
+  El color de marca en hover se resuelve con la variable --marca, sin JS. Las
+  marcas negras no la declaran, y por eso no cambian de color.
+*/
+const pastillas = STACK.map((herramienta, i) => ({
+  ...herramienta,
+  icono: iconoDe(herramienta.icono),
+  acento: i % 5 === 0,
+  invertida: i % 7 === 3
+}))
+---
+
+<section id="stack" class="relative z-1 border-t border-line pad-x pad-y">
+  <div class="mb-10 flex flex-wrap items-end justify-between gap-4">
+    <div class="flex flex-col gap-4">
+      <div data-scramble class="font-mono text-[13px] text-mut">{dic.stack.etiqueta}</div>
+      <div class="overflow-hidden pb-[.1em]">
+        <h2 data-h class="text-h2">{dic.stack.titulo}</h2>
+      </div>
+    </div>
+
+    <div data-reveal class="flex items-center gap-4 font-mono text-[13px] text-mut">
+      <span>{dic.stack.pista}</span>
+      <button
+        type="button"
+        data-sacudir
+        class="cursor-pointer rounded-full border-0 bg-acc px-4 py-2 font-mono text-[13px] font-medium text-onacc"
+      >
+        {dic.stack.sacudir}
+      </button>
+    </div>
+  </div>
+
+  <div
+    data-juego
+    class="relative box-border flex h-[480px] flex-wrap content-start gap-2.5 overflow-hidden rounded-juego border border-line p-5"
+    style="background-color:color-mix(in srgb,var(--bg) 70%,transparent);background-image:radial-gradient(var(--line) 1px,transparent 1px);background-size:24px 24px"
+  >
+    {
+      pastillas.map(pastilla => (
+        <div
+          data-chip
+          data-cursor={dic.cursor.arrastra}
+          class:list={[
+            'flex touch-none items-center gap-2.5 rounded-full border px-5 py-[11px] text-[19px] whitespace-nowrap select-none',
+            pastilla.acento
+              ? 'border-transparent bg-acc font-medium text-onacc'
+              : pastilla.invertida
+                ? 'border-transparent bg-fg text-bg'
+                : 'border-line bg-card text-fg'
+          ]}
+          style={pastilla.marca ? `--marca:${pastilla.marca}` : undefined}
+        >
+          {pastilla.icono && (
+            <svg
+              data-ico
+              viewBox="0 0 24 24"
+              width="20"
+              height="20"
+              fill="currentColor"
+              aria-hidden="true"
+              class="block shrink-0"
+            >
+              <path d={pastilla.icono.path} />
+            </svg>
+          )}
+          <span>{pastilla.nombre}</span>
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  [data-ico] {
+    transition: color .35s ease;
+  }
+
+  [data-chip]:hover [data-ico] {
+    color: var(--marca, currentColor);
+  }
+</style>

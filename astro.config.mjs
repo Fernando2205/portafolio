@@ -3,10 +3,10 @@ import { defineConfig } from 'astro/config'
 import tailwindcss from '@tailwindcss/vite'
 
 // Sitio estático bilingüe: español en / e inglés en /en/.
-// `site` se usa para el canonical, los hreflang y los metadatos OG:
-// cámbialo por el dominio definitivo al desplegar.
+// `site` alimenta el canonical, los hreflang y la URL absoluta de la imagen de
+// Open Graph. Tiene que ser una URL completa, con protocolo.
 export default defineConfig({
-  site: 'https://delio-palacios.pages.dev',
+  site: 'https://fercho.dev',
   output: 'static',
   i18n: {
     defaultLocale: 'es',

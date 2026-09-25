@@ -113,10 +113,6 @@ Los huecos están marcados en el código con un comentario `pendiente`.
       repo. El enlace «ver proyecto ↗» solo aparece cuando hay `url`.
 - [ ] **Descripción real de UrbaNet** → `src/data/logros.ts`.
 - [ ] **CV actualizado** → reemplaza `public/cv/CV-Delio-Palacios.pdf`.
-- [ ] **Dominio definitivo** → `site` en
-      [`astro.config.mjs`](astro.config.mjs). Hoy apunta a un `.pages.dev` de
-      ejemplo y de ahí salen el canonical, los `hreflang` y la URL de la imagen
-      de Open Graph, que tiene que ser absoluta para que la tarjeta cargue.
 
 ## Despliegue
 

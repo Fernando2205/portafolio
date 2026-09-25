@@ -9,6 +9,7 @@ import { iniciarTrayectoria } from './journey'
 import { iniciarLoader } from './loader'
 import { iniciarMarquesina } from './marquee'
 import { iniciarNav } from './nav'
+import { iniciarProyectos } from './projects'
 import { iniciarScroll } from './scroll'
 import { CLAVES, leerJson } from './store'
 import { inicializarTema } from './theme'
@@ -37,6 +38,7 @@ const modulos = [
   iniciarSobre,
   iniciarTrayectoria,
   iniciarLogros,
+  iniciarProyectos,
   iniciarScroll,
   iniciarLoader
 ]

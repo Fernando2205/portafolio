@@ -1,0 +1,165 @@
+---
+import { Image } from 'astro:assets'
+import { capturaDe } from '../data/imagenes'
+import { PROYECTOS } from '../data/proyectos'
+import { getLang, t } from '../i18n/utils'
+import PreviewProyecto from './PreviewProyecto.astro'
+
+const lang = getLang(Astro.url)
+const dic = t(lang)
+
+const RAYAS =
+  'repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 1px,transparent 1px 11px)'
+---
+
+<section id="proyectos" class="relative z-1 border-t border-line pad-x pad-y">
+  <div class="mb-12 flex flex-wrap items-end justify-between gap-4">
+    <div class="flex flex-col gap-4">
+      <div data-scramble class="font-mono text-[13px] text-mut">{dic.proyectos.etiqueta}</div>
+      <div class="overflow-hidden pb-[.1em]">
+        <h2 data-h class="text-h2">{dic.proyectos.titulo}</h2>
+      </div>
+    </div>
+    <div data-reveal class="font-mono text-[13px] text-mut">{dic.proyectos.pista}</div>
+  </div>
+
+  <div data-lista-proyectos class="border-t border-line">
+    {
+      PROYECTOS.map((proyecto, i) => {
+        const captura = capturaDe(proyecto.slug)
+        const idPanel = `proyecto-panel-${proyecto.slug}`
+        return (
+          <div
+            data-row
+            data-slug={proyecto.slug}
+            class="cursor-pointer border-b border-line"
+            style="padding:clamp(20px,3vw,32px) 0"
+          >
+            <div class="flex flex-wrap items-baseline gap-x-6 gap-y-2">
+              <span class="w-8 font-mono text-[13px] text-mut">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+
+              <h3
+                data-nombre
+                class="flex-1 basis-[300px] text-proyecto"
+                style="transition:transform .45s var(--ease-suave),color .3s,font-variation-settings .45s"
+              >
+                {proyecto.nombre}
+              </h3>
+
+              <span class="font-mono text-[13px] text-mut">
+                {`${proyecto.tipo[lang]} — ${proyecto.anio}`}
+              </span>
+
+              <button
+                type="button"
+                data-mas-proyecto
+                aria-expanded="false"
+                aria-controls={idPanel}
+                aria-label={`${dic.cursor.abrir} ${proyecto.nombre}`}
+                data-cursor={dic.cursor.abrir}
+                class="w-5 cursor-pointer border-0 bg-transparent p-0 text-right font-mono text-xl text-acct"
+                style="transition:transform .4s"
+              >
+                +
+              </button>
+            </div>
+
+            <div
+              id={idPanel}
+              data-panel
+              hidden
+              class="grid gap-8"
+              style="grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));padding:32px 0 8px clamp(0px,4vw,56px)"
+            >
+              <div
+                class="relative aspect-[16/10] overflow-hidden rounded-preview"
+                style={`background:${proyecto.tinte}`}
+              >
+                {captura
+                  ? (
+                      <Image
+                        src={captura}
+                        alt={`${dic.proyectos.captura} · ${proyecto.nombre}`}
+                        widths={[480, 960]}
+                        sizes="(max-width: 640px) 100vw, 480px"
+                        class="h-full w-full object-cover"
+                      />
+                    )
+                  : (
+                      <>
+                        <div class="absolute inset-0" style={`background:${RAYAS}`}></div>
+                        <div
+                          class="absolute bottom-3.5 left-4 font-mono text-xs"
+                          style="color:#efe7dc"
+                        >
+                          {`${dic.proyectos.captura} · ${proyecto.nombre}`}
+                        </div>
+                      </>
+                    )}
+              </div>
+
+              <div class="flex flex-col gap-5">
+                {proyecto.distintivo && (
+                  <div
+                    class="self-start rounded-full bg-acc px-3.5 py-1.5 font-mono text-xs font-medium text-onacc"
+                  >
+                    {proyecto.distintivo[lang]}
+                  </div>
+                )}
+
+                <p class="max-w-[52ch] text-[clamp(17px,1.5vw,20px)] leading-[1.5]">
+                  {proyecto.descripcion[lang]}
+                </p>
+
+                <div class="flex flex-wrap gap-2">
+                  {proyecto.etiquetas.map(etiqueta => (
+                    <span
+                      class="rounded-full border border-line px-3 py-[5px] font-mono text-xs text-mut"
+                    >
+                      {etiqueta}
+                    </span>
+                  ))}
+                </div>
+
+                <div class="flex flex-wrap items-baseline gap-x-7 gap-y-3 font-mono text-sm">
+                  {proyecto.url && (
+                    <a
+                      href={proyecto.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      data-cursor={dic.cursor.ver}
+                      class="text-acct"
+                    >
+                      {`${dic.proyectos.verProyecto} ↗`}
+                    </a>
+                  )}
+                  {proyecto.repo && (
+                    <a
+                      href={proyecto.repo}
+                      target="_blank"
+                      rel="noreferrer"
+                      data-cursor={dic.cursor.ver}
+                      class="text-acct"
+                    >
+                      {`${dic.proyectos.codigo} ↗`}
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      })
+    }
+  </div>
+</section>
+
+<PreviewProyecto />
+
+<noscript>
+  <style>
+    [data-row] [data-panel] { display: grid !important; }
+  </style>
+</noscript>

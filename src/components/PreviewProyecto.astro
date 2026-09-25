@@ -1,0 +1,63 @@
+---
+import { Image } from 'astro:assets'
+import { capturaDe } from '../data/imagenes'
+import { PROYECTOS } from '../data/proyectos'
+import { getLang, t } from '../i18n/utils'
+
+const dic = t(getLang(Astro.url))
+
+/*
+  Preview flotante de 320×210 que sigue al cursor. Se renderizan todas las
+  previews apiladas y projects.ts muestra la del proyecto en hover: así las
+  capturas pasan por astro:assets en lugar de inyectarse desde JS.
+*/
+const RAYAS =
+  'repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 1px,transparent 1px 11px)'
+---
+
+<div
+  data-preview
+  class="pointer-events-none fixed top-0 left-0 z-40 h-[210px] w-80 overflow-hidden rounded-preview opacity-0"
+  style="transition:opacity .25s ease"
+  aria-hidden="true"
+>
+  {
+    PROYECTOS.map((proyecto, i) => {
+      const captura = capturaDe(proyecto.slug)
+      return (
+        <div
+          data-preview-item={proyecto.slug}
+          hidden
+          class="absolute inset-0"
+          style={`background:${proyecto.tinte}`}
+        >
+          {captura
+            ? (
+                <Image
+                  src={captura}
+                  alt=""
+                  widths={[320, 640]}
+                  sizes="320px"
+                  class="h-full w-full object-cover"
+                />
+              )
+            : <div class="absolute inset-0" style={`background:${RAYAS}`}></div>}
+
+          <div
+            class="absolute top-1.5 right-3.5 text-[88px] leading-none tracking-[-.05em]"
+            style="color:rgba(255,255,255,.18)"
+          >
+            {String(i + 1).padStart(2, '0')}
+          </div>
+
+          <div
+            class="absolute bottom-3.5 left-4 right-4 font-mono text-xs"
+            style="color:#efe7dc"
+          >
+            {`${dic.proyectos.captura} · ${proyecto.nombre}`}
+          </div>
+        </div>
+      )
+    })
+  }
+</div>

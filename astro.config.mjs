@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 // `site` alimenta el canonical, los hreflang y la URL absoluta de la imagen de
 // Open Graph. Tiene que ser una URL completa, con protocolo.
 export default defineConfig({
-  site: 'https://fercho.dev',
+  site: 'https://www.fercho.dev',
   output: 'static',
   i18n: {
     defaultLocale: 'es',

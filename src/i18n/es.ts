@@ -50,6 +50,7 @@ export const es = {
     claro: '○ claro',
     oscuro: '● oscuro',
     secretos: 'secretos encontrados',
+    etiqueta: 'Navegación principal',
     irAlContenido: 'Saltar al contenido'
   },
 

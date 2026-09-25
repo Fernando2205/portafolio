@@ -48,6 +48,7 @@ export const en: Diccionario = {
     claro: '○ light',
     oscuro: '● dark',
     secretos: 'secrets found',
+    etiqueta: 'Main navigation',
     irAlContenido: 'Skip to content'
   },
 

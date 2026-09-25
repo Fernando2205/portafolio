@@ -28,7 +28,7 @@ export function iniciarTrayectoria () {
 
     linea.dataset.filtro = boton.dataset.pestana
     for (const pestana of pestanas) {
-      pestana.setAttribute('aria-selected', pestana === boton ? 'true' : 'false')
+      pestana.setAttribute('aria-pressed', pestana === boton ? 'true' : 'false')
     }
 
     if (abierto) {

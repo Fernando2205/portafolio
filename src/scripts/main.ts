@@ -14,10 +14,9 @@ import { iniciarNav } from './nav'
 import { iniciarParticulas } from './particles'
 import { iniciarFisica } from './physics'
 import { iniciarProyectos } from './projects'
-import { cargarSecretos } from './secrets'
+import { cargarSecretos, totalEncontrados } from './secrets'
 import { iniciarScroll } from './scroll'
 import { iniciarTerminal } from './terminal'
-import { CLAVES, leerJson } from './store'
 import { inicializarTema } from './theme'
 
 /**
@@ -59,8 +58,7 @@ function iniciar () {
   iniciado = true
 
   cargarSecretos()
-  const secretos = leerJson<string[]>(CLAVES.secretos, [])
-  inicializarTema(secretos.length, TOTAL_SECRETOS)
+  inicializarTema(totalEncontrados(), TOTAL_SECRETOS)
 
   for (const modulo of modulos) bajas.push(modulo())
 }

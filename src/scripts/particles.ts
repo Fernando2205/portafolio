@@ -24,6 +24,7 @@ import { acentoActual, colorParticulas, esOscuro } from './theme'
  */
 interface Escena {
   N: number
+  formaActual: () => string
   redimensionar: () => void
   aplicarColores: () => void
   morfarA: (forma: string) => void
@@ -69,16 +70,6 @@ export function iniciarParticulas () {
   bajas.push(on('girar', valor => { giroExtra += valor }))
   bajas.push(on('fiesta', ms => { fiestaHasta = performance.now() + ms }))
   bajas.push(on('introFin', () => escena?.morfarA(formaDeSeccion)))
-
-  bajas.push(on('forma', nombre => {
-    if (nombre === 'siguiente') {
-      const actual = CICLO_FORMAS.indexOf(formaDeSeccion)
-      formaDeSeccion = CICLO_FORMAS[(actual + 1) % CICLO_FORMAS.length]
-      escena?.morfarA(formaDeSeccion)
-      return
-    }
-    escena?.morfarA(nombre)
-  }))
 
   bajas.push(on('palabra', ({ texto, ms }) => {
     if (!escena) return
@@ -316,5 +307,33 @@ async function crearEscena (): Promise<Escena | null> {
   aplicarColores()
   lienzo.style.opacity = '1'
 
-  return { N, redimensionar, aplicarColores, morfarA, registrarForma, paso }
+  return {
+    N,
+    formaActual: () => formaActual,
+    redimensionar,
+    aplicarColores,
+    morfarA,
+    registrarForma,
+    paso
+  }
+}
+
+/** Morfa ya a una forma, sin cambiar la que le corresponde a la sección. */
+export function morfarAhora (nombre: string) {
+  escena?.morfarA(nombre)
+}
+
+/** Pasa a la siguiente forma del ciclo. Devuelve su nombre. */
+export function avanzarForma (): NombreForma {
+  const actual = escena?.formaActual() ?? formaDeSeccion
+  const indice = CICLO_FORMAS.indexOf(actual as NombreForma)
+  const siguiente = CICLO_FORMAS[(indice + 1) % CICLO_FORMAS.length]
+  escena?.morfarA(siguiente)
+  return siguiente
+}
+
+/** Morfa a una forma y vuelve a la de la sección pasados `ms` milisegundos. */
+export function formaTemporal (nombre: string, ms: number) {
+  escena?.morfarA(nombre)
+  window.setTimeout(() => escena?.morfarA(formaDeSeccion), ms)
 }

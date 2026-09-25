@@ -23,6 +23,26 @@ interface Pastilla {
   entrando: boolean
 }
 
+let pastillas: Pastilla[] = []
+/** 0 = quieta hasta que el recuadro entra en pantalla, ±1 = cayendo. */
+let gravedad = 0
+
+/** Invierte la gravedad del stack. Devuelve el signo nuevo. */
+export function invertirGravedad () {
+  gravedad = gravedad < 0 ? 1 : -1
+  for (const pastilla of pastillas) pastilla.entrando = false
+  return gravedad
+}
+
+export function sacudirStack () {
+  if (gravedad === 0) gravedad = 1
+  for (const pastilla of pastillas) {
+    pastilla.entrando = false
+    pastilla.vy = -(8 + Math.random() * 14) * Math.sign(gravedad)
+    pastilla.vx = (Math.random() - 0.5) * 26
+  }
+}
+
 export function iniciarFisica () {
   const caja = document.querySelector<HTMLElement>('[data-juego]')
   if (!caja || reducido) return
@@ -39,7 +59,7 @@ export function iniciarFisica () {
     h: el.offsetHeight
   }))
 
-  const pastillas: Pastilla[] = elementos.map((el, i) => {
+  pastillas = elementos.map((el, i) => {
     el.style.position = 'absolute'
     el.style.left = '0'
     el.style.top = '0'
@@ -62,7 +82,6 @@ export function iniciarFisica () {
     pastilla.el.style.transform = `translate(${pastilla.x}px,${pastilla.y}px)`
   }
 
-  let gravedad = 0
   let visible = true
   let zIndice = 1
   let arrastre: { pastilla: Pastilla, dx: number, dy: number } | null = null
@@ -129,25 +148,11 @@ export function iniciarFisica () {
     window.removeEventListener('pointercancel', alSubirPuntero)
   })
 
-  function sacudir () {
-    if (gravedad === 0) gravedad = 1
-    for (const pastilla of pastillas) {
-      pastilla.entrando = false
-      pastilla.vy = -(8 + Math.random() * 14) * Math.sign(gravedad)
-      pastilla.vx = (Math.random() - 0.5) * 26
-    }
-  }
-
   const boton = document.querySelector<HTMLElement>('[data-sacudir]')
   if (boton) {
-    boton.addEventListener('click', sacudir)
-    bajas.push(() => boton.removeEventListener('click', sacudir))
+    boton.addEventListener('click', sacudirStack)
+    bajas.push(() => boton.removeEventListener('click', sacudirStack))
   }
-
-  bajas.push(on('gravedad', signo => {
-    gravedad = signo
-    for (const pastilla of pastillas) pastilla.entrando = false
-  }))
 
   bajas.push(on('medir', () => {
     for (const pastilla of pastillas) {
@@ -212,6 +217,8 @@ export function iniciarFisica () {
     alEntrar.disconnect()
     alVer.disconnect()
     for (const baja of bajas) baja()
+    pastillas = []
+    gravedad = 0
   }
 }
 

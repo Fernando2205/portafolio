@@ -1,5 +1,6 @@
 import type { ClaveSecreto } from '../data/secretos'
 import type { NombrePaleta } from '../data/paletas'
+import type { Linea } from './lineas'
 
 /**
  * Bus de eventos tipado. Los módulos de cliente no se importan entre sí para
@@ -14,20 +15,16 @@ export interface Eventos {
   seccion: string
   /** Cambió la paleta, el modo claro/oscuro o el acento. */
   tema: { paleta: NombrePaleta, oscuro: boolean, acento: string }
-  /** Hay que llevar las partículas a otra forma. */
-  forma: string
   /** Se encontró un secreto. */
   secreto: ClaveSecreto
   /** Se completaron los 8 secretos. */
   recompensa: void
   /** Imprime líneas en la terminal desde fuera de ella. */
-  imprimir: Array<{ tipo: 'in' | 'out' | 'acc', texto: string }>
+  imprimir: Linea[]
   /** Abre el panel de un proyecto por su slug y baja hasta él. */
   abrirProyecto: string
   /** Ejecuta un comando en la terminal. */
   ejecutar: string
-  /** Invierte o restaura la gravedad del stack. */
-  gravedad: number
   /** Enciende el modo fiesta durante N milisegundos. */
   fiesta: number
   /** Las partículas forman una palabra durante N milisegundos. */

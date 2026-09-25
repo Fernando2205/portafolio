@@ -11,6 +11,22 @@ import { alFrame, lerp, tactil } from './loop'
  */
 const SELECTOR = 'a,button,input,[data-cursor]'
 
+/*
+  Referencias a nivel de módulo para poder apagar el cursor personalizado desde
+  fuera: un <dialog> abierto con showModal() se pinta en la capa superior, por
+  encima del punto y el anillo, y sin esto no se vería ningún cursor encima.
+*/
+let estiloOculta: HTMLStyleElement | null = null
+let piezas: HTMLElement[] = []
+let pausado = false
+
+export function pausarCursor (valor: boolean) {
+  pausado = valor
+  if (!estiloOculta) return
+  estiloOculta.disabled = valor
+  for (const pieza of piezas) pieza.style.visibility = valor ? 'hidden' : 'visible'
+}
+
 export function iniciarCursor () {
   if (tactil) return
 
@@ -32,6 +48,9 @@ function montar (punto: HTMLElement, anillo: HTMLElement, etiqueta: HTMLElement)
   const oculta = document.createElement('style')
   oculta.textContent = '*{cursor:none !important}'
   document.head.appendChild(oculta)
+  estiloOculta = oculta
+  piezas = [punto, anillo]
+  pausarCursor(pausado)
 
   const pos = { x: -200, y: -200 }
   let estadoAnterior = ''
@@ -77,5 +96,7 @@ function montar (punto: HTMLElement, anillo: HTMLElement, etiqueta: HTMLElement)
     bajaFrame()
     window.removeEventListener('pointermove', alMover)
     oculta.remove()
+    estiloOculta = null
+    piezas = []
   }
 }

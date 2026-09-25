@@ -5,6 +5,7 @@ import { limpiar } from './bus'
 import { iniciarReloj } from './clock'
 import { iniciarContacto } from './contact'
 import { iniciarCursor } from './cursor'
+import { iniciarVisorCv } from './cv'
 import { iniciarHuevos } from './eggs'
 import { iniciarHero } from './hero'
 import { iniciarTrayectoria } from './journey'
@@ -47,6 +48,7 @@ const modulos = [
   iniciarProyectos,
   iniciarFisica,
   iniciarContacto,
+  iniciarVisorCv,
   iniciarParticulas,
   iniciarTerminal,
   iniciarHuevos,

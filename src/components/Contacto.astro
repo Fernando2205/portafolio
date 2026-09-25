@@ -1,14 +1,15 @@
 ---
 import { PERFIL } from '../data/perfil'
 import { getLang, t } from '../i18n/utils'
+import VisorCv from './VisorCv.astro'
 
 const dic = t(getLang(Astro.url))
 
 const enlaces = [
-  { texto: 'WhatsApp ↗', href: PERFIL.whatsapp, descarga: false },
-  { texto: 'LinkedIn ↗', href: PERFIL.linkedin, descarga: false },
-  { texto: 'GitHub ↗', href: PERFIL.github, descarga: false },
-  { texto: dic.contacto.descargarCv, href: PERFIL.cv, descarga: true }
+  { texto: 'WhatsApp ↗', href: PERFIL.whatsapp, visor: false },
+  { texto: 'LinkedIn ↗', href: PERFIL.linkedin, visor: false },
+  { texto: 'GitHub ↗', href: PERFIL.github, visor: false },
+  { texto: dic.contacto.verCv, href: PERFIL.cv, visor: true }
 ]
 ---
 
@@ -49,9 +50,10 @@ const enlaces = [
       enlaces.map(enlace => (
         <a
           href={enlace.href}
-          target={enlace.descarga ? undefined : '_blank'}
-          rel={enlace.descarga ? undefined : 'noreferrer'}
-          download={enlace.descarga ? '' : undefined}
+          target="_blank"
+          rel="noreferrer"
+          data-ver-cv={enlace.visor ? '' : undefined}
+          data-cursor={enlace.visor ? dic.cursor.ver : undefined}
           data-scramble-hover
         >
           {enlace.texto}
@@ -60,3 +62,5 @@ const enlaces = [
     }
   </div>
 </section>
+
+<VisorCv />

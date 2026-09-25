@@ -1,0 +1,96 @@
+---
+import { PERFIL } from '../data/perfil'
+import { getLang, t } from '../i18n/utils'
+
+const dic = t(getLang(Astro.url))
+const archivo = PERFIL.cv.split('/').pop()
+
+/*
+  Visor del CV con la misma estética que la ventana de la terminal. Es un
+  <dialog> nativo: el foco atrapado, Escape y el fondo los da el navegador.
+
+  El src del iframe se pone desde cv.ts al abrirlo, no aquí, para no descargar
+  el PDF en cada visita.
+*/
+---
+
+<dialog
+  data-visor-cv
+  aria-label={dic.contacto.visorCv}
+  class="m-auto flex h-[min(88vh,1100px)] max-h-[calc(100dvh-32px)] w-[min(1000px,calc(100vw-32px))] max-w-none flex-col overflow-hidden rounded-tarjeta border border-line bg-card p-0 text-fg shadow-terminal backdrop:bg-black/70"
+>
+  <div class="flex shrink-0 items-center gap-2 border-b border-line px-[18px] py-3.5">
+    <span class="h-[11px] w-[11px] rounded-full bg-line" aria-hidden="true"></span>
+    <span class="h-[11px] w-[11px] rounded-full bg-line" aria-hidden="true"></span>
+    <span class="h-[11px] w-[11px] rounded-full bg-acc" aria-hidden="true"></span>
+    <span class="ml-2.5 font-mono text-xs text-mut">{archivo}</span>
+
+    <div class="ml-auto flex items-center gap-4 font-mono text-xs">
+      <a
+        href={PERFIL.cv}
+        target="_blank"
+        rel="noreferrer"
+        data-cursor={dic.cursor.ver}
+        class="hidden text-mut hover:text-fg sm:inline"
+      >
+        {`${dic.contacto.abrirCv} ↗`}
+      </a>
+      <a href={PERFIL.cv} download data-cursor={dic.cursor.ver} class="text-acct">
+        {dic.contacto.descargarCv}
+      </a>
+      <button
+        type="button"
+        data-cerrar-cv
+        aria-label={dic.contacto.cerrarCv}
+        data-cursor={dic.cursor.cerrar}
+        class="cursor-pointer border-0 bg-transparent p-0 text-base leading-none text-mut hover:text-fg"
+      >
+        ✕
+      </button>
+    </div>
+  </div>
+
+  <div class="min-h-0 flex-1 bg-bg">
+    <iframe data-visor-marco title={dic.contacto.marcoCv} class="h-full w-full border-0"></iframe>
+  </div>
+</dialog>
+
+<style>
+  /*
+    Entrada con fundido. `@starting-style` y `allow-discrete` hacen que también
+    se anime al abrir, no solo al cerrar; donde no haya soporte, aparece de
+    golpe y ya.
+  */
+  dialog[data-visor-cv] {
+    opacity: 0;
+    transform: scale(.98);
+    transition:
+      opacity .25s ease,
+      transform .25s ease,
+      overlay .25s ease allow-discrete,
+      display .25s ease allow-discrete;
+  }
+
+  dialog[data-visor-cv][open] {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  @starting-style {
+    dialog[data-visor-cv][open] {
+      opacity: 0;
+      transform: scale(.98);
+    }
+  }
+
+  dialog[data-visor-cv]::backdrop {
+    backdrop-filter: blur(4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog[data-visor-cv] {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

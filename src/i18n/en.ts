@@ -133,6 +133,11 @@ export const en: Diccionario = {
     titulo: 'Have a project or a role? Let’s talk.',
     copiar: 'or copy the address',
     copiado: '✓ copied to clipboard',
+    verCv: 'View CV',
+    visorCv: 'CV viewer',
+    marcoCv: 'Delio Fernando Palacios CV',
+    cerrarCv: 'Close the viewer',
+    abrirCv: 'open in a new tab',
     descargarCv: 'Download CV ↓'
   },
 

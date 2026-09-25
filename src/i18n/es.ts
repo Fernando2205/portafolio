@@ -135,6 +135,11 @@ export const es = {
     titulo: '¿Tienes un proyecto o una vacante? Hablemos.',
     copiar: 'o copia la dirección',
     copiado: '✓ copiado al portapapeles',
+    verCv: 'Ver CV',
+    visorCv: 'Visor del CV',
+    marcoCv: 'CV de Delio Fernando Palacios',
+    cerrarCv: 'Cerrar el visor',
+    abrirCv: 'abrir en pestaña nueva',
     descargarCv: 'Descargar CV ↓'
   },
 

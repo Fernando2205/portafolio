@@ -111,8 +111,6 @@ Los huecos están marcados en el código con un comentario `pendiente`.
 - [ ] **URLs de demo** de OCULUS, CLARA, CodeMaster, PokeCards 3D y Películas
       App → campo `url` en `src/data/proyectos.ts`. SamCore ya tiene demo y
       repo. El enlace «ver proyecto ↗» solo aparece cuando hay `url`.
-- [ ] **URLs de las credenciales** de las 6 certificaciones → campo `url` en
-      `src/data/trayectoria.ts`. «ver credencial ↗» solo aparece cuando hay una.
 - [ ] **Descripción real de UrbaNet** → `src/data/logros.ts`.
 - [ ] **CV actualizado** → reemplaza `public/cv/CV-Delio-Palacios.pdf`.
 - [ ] **Dominio definitivo** → `site` en

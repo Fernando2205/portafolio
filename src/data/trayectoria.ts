@@ -62,7 +62,7 @@ export const TRAYECTORIA: ItemTrayectoria[] = [
     anio: '2026',
     tipo: 'cert',
     titulo: 'NSE 1 · Ciberseguridad',
-    url: '', // pendiente: credencial
+    url: 'https://www.credly.com/badges/b0ac16d1-2434-4a5d-b5b4-0a92a8b0d08b/',
     subtitulo: { es: 'Fortinet', en: 'Fortinet' },
     detalle: {
       es: ['Certificación en fundamentos de ciberseguridad.'],
@@ -73,7 +73,7 @@ export const TRAYECTORIA: ItemTrayectoria[] = [
     anio: '2025',
     tipo: 'cert',
     titulo: 'Desarrollo de aplicaciones en la nube con Python',
-    url: '', // pendiente: credencial
+    url: 'https://www.coursera.org/account/accomplishments/verify/6RCSHKNPRC9S',
     subtitulo: { es: 'Amazon Web Services', en: 'Amazon Web Services' },
     detalle: {
       es: ['Desarrollo de aplicaciones en la nube con Python en AWS.'],
@@ -84,7 +84,7 @@ export const TRAYECTORIA: ItemTrayectoria[] = [
     anio: '2025',
     tipo: 'cert',
     titulo: 'Consultor en la nube de AWS',
-    url: '', // pendiente: credencial
+    url: 'https://www.coursera.org/account/accomplishments/verify/LAAOQE9ZU7K0',
     subtitulo: { es: 'Amazon Web Services', en: 'Amazon Web Services' },
     detalle: {
       es: ['Habilidades para trabajar como consultor en la nube de AWS.'],
@@ -92,10 +92,21 @@ export const TRAYECTORIA: ItemTrayectoria[] = [
     }
   },
   {
+    anio: '2025',
+    tipo: 'cert',
+    titulo: 'Resolver problemas y tomar decisiones con eficacia',
+    url: 'https://www.coursera.org/account/accomplishments/verify/BKK0Q1NFKFNF',
+    subtitulo: { es: 'Universidad de California, Irvine', en: 'University of California, Irvine' },
+    detalle: {
+      es: ['Habilidades para resolver problemas y tomar decisiones con eficacia.'],
+      en: ['Skills to solve problems and make decisions effectively.']
+    }
+  },
+  {
     anio: '2024',
     tipo: 'cert',
     titulo: 'Programa ONE F2 T6 · Backend',
-    url: '', // pendiente: credencial
+    url: 'https://app.aluracursos.com/program/certificate/33192f01-32b7-4aee-b46a-dd47c4feb6f2?lang',
     subtitulo: { es: 'Oracle · Oracle Next Education', en: 'Oracle · Oracle Next Education' },
     detalle: {
       es: ['Especialización Backend del programa Oracle Next Education.'],
@@ -106,7 +117,7 @@ export const TRAYECTORIA: ItemTrayectoria[] = [
     anio: '2024',
     tipo: 'cert',
     titulo: 'Formación principiante en programación G6',
-    url: '', // pendiente: credencial
+    url: 'https://app.aluracursos.com/degree/certificate/7e6abf9e-e47f-4115-a0f5-1b741780ad05',
     subtitulo: { es: 'Oracle · Oracle Next Education', en: 'Oracle · Oracle Next Education' },
     detalle: {
       es: ['Fundamentos de programación del programa ONE.'],
@@ -117,7 +128,7 @@ export const TRAYECTORIA: ItemTrayectoria[] = [
     anio: '2024',
     tipo: 'cert',
     titulo: 'Desarrollo personal G6',
-    url: '', // pendiente: credencial
+    url: 'https://app.aluracursos.com/degree/certificate/e7bd4cbb-a93e-4709-be48-cfc9cceb529c',
     subtitulo: { es: 'Oracle · Oracle Next Education', en: 'Oracle · Oracle Next Education' },
     detalle: {
       es: ['Formación en desarrollo personal del programa ONE.'],

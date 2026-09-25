@@ -83,7 +83,7 @@ export const PROYECTOS: Proyecto[] = [
     anio: '2024',
     tipo: { es: 'Pokédex en 3D', en: '3D Pokédex' },
     tinte: 'oklch(0.42 0.07 330)',
-    url: '', // pendiente: demo de PokeCards 3D
+    url: 'https://pokecards-sigma.vercel.app/', // pendiente: demo de PokeCards 3D
     descripcion: {
       es: 'Pokédex web que renderiza cartas de Pokémon en 3D real con React Three Fiber, con lista, panel de detalles y datos en tiempo real desde PokeAPI.',
       en: 'Web Pokédex that renders Pokémon cards in real 3D with React Three Fiber, with a list, detail panel and live data from PokeAPI.'
@@ -96,7 +96,7 @@ export const PROYECTOS: Proyecto[] = [
     anio: '2024',
     tipo: { es: 'App móvil', en: 'Mobile app' },
     tinte: 'oklch(0.42 0.07 200)',
-    url: '', // pendiente: demo de Películas App
+    url: 'https://github.com/Fernando2205/peliculas-app-flutter', // pendiente: demo de Películas App
     descripcion: {
       es: 'App en Flutter para descubrir películas y series con datos de TMDB: autenticación segura, códigos QR geolocalizados en mapa, historial de escaneos y notificaciones push con Firebase.',
       en: 'Flutter app to discover movies and shows with TMDB data: secure auth, geolocated QR codes on a map, scan history and push notifications with Firebase.'

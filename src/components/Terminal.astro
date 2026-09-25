@@ -96,3 +96,41 @@ const bienvenida = dic.terminal.bienvenida.map((texto, i) => ({
     }
   </div>
 </section>
+
+<style>
+  /*
+    La barra de scroll del historial, afinada a la paleta: sin surco, delgada y
+    con el pulgar en el color del texto secundario, más marcado al pasar por
+    encima de la ventana. Se deja visible a propósito, porque es la única señal
+    de que hay historial más arriba.
+
+    `scrollbar-gutter: stable` reserva su hueco desde el principio para que el
+    texto no dé un salto la primera vez que el historial desborda.
+  */
+  [data-terminal-cuerpo] {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--mut) 32%, transparent) transparent;
+    scrollbar-gutter: stable;
+  }
+
+  [data-terminal-cuerpo]::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  [data-terminal-cuerpo]::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  [data-terminal-cuerpo]::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--mut) 32%, transparent);
+    border-radius: 999px;
+  }
+
+  [data-terminal-ventana]:hover [data-terminal-cuerpo] {
+    scrollbar-color: color-mix(in srgb, var(--mut) 60%, transparent) transparent;
+  }
+
+  [data-terminal-ventana]:hover [data-terminal-cuerpo]::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--mut) 60%, transparent);
+  }
+</style>

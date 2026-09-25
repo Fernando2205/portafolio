@@ -28,12 +28,12 @@ export const SECRETOS: Secreto[] = [
     nombre: { es: 'Fiesta', en: 'Party' },
     pistas: {
       es: [
-        'algo para celebrar en la terminal',
+        'la terminal responde a una palabra de celebración',
         "en inglés se diría 'party'",
         'escribe: fiesta'
       ],
       en: [
-        'something to celebrate in the terminal',
+        'the terminal answers to a word about celebrating',
         "in spanish it would be 'fiesta'",
         'type: party'
       ]
@@ -44,12 +44,12 @@ export const SECRETOS: Secreto[] = [
     nombre: { es: 'Gravedad invertida', en: 'Inverted gravity' },
     pistas: {
       es: [
-        'la física también vive en la terminal',
+        'desde la terminal se puede alterar la física de la página',
         'newton tiene algo que ver',
         'escribe: gravedad'
       ],
       en: [
-        'physics lives in the terminal too',
+        'from the terminal you can alter the physics of the page',
         'newton has something to do with it',
         'type: gravity'
       ]
@@ -76,12 +76,12 @@ export const SECRETOS: Secreto[] = [
     nombre: { es: 'Autodestrucción', en: 'Self-destruct' },
     pistas: {
       es: [
-        'el comando más peligroso de linux',
+        'la terminal acepta el comando más peligroso de linux',
         'borra todo, recursivo y forzado',
         'escribe: sudo rm -rf /'
       ],
       en: [
-        'the most dangerous linux command',
+        'the terminal accepts the most dangerous command in linux',
         'deletes everything, recursive and forced',
         'type: sudo rm -rf /'
       ]
@@ -92,12 +92,12 @@ export const SECRETOS: Secreto[] = [
     nombre: { es: 'Me conoces', en: 'You know me' },
     pistas: {
       es: [
-        'no todo se escribe en la terminal',
+        'este no va en la terminal, sino en la página',
         'sal de la terminal y teclea mi nombre de pila, sin usar ningún campo',
         'haz clic en una zona vacía de la página y teclea: delio'
       ],
       en: [
-        'not everything is typed in the terminal',
+        'this one is not typed in the terminal, but on the page',
         'leave the terminal and type my first name, with no field focused',
         'click an empty area of the page and type: delio'
       ]
@@ -108,12 +108,12 @@ export const SECRETOS: Secreto[] = [
     nombre: { es: 'Modo desarrollador', en: 'Developer mode' },
     pistas: {
       es: [
-        'hay algo arriba que premia la insistencia',
+        'algo de la barra de arriba premia la insistencia',
         '~/delio, arriba a la izquierda, no es solo texto',
         'haz clic 5 veces seguidas y rápido en ~/delio'
       ],
       en: [
-        'something up top rewards insisting',
+        'something in the bar up top rewards insisting',
         '~/delio, in the top left, is not just text',
         'click ~/delio 5 times in a row, fast'
       ]
@@ -124,12 +124,12 @@ export const SECRETOS: Secreto[] = [
     nombre: { es: 'Modo Matrix', en: 'Matrix mode' },
     pistas: {
       es: [
-        'un código de videojuego clásico',
+        'un código de videojuego clásico, con el teclado y fuera de la terminal',
         'arriba, arriba, abajo, abajo…',
         'teclea ↑ ↑ ↓ ↓ ← → ← → B A'
       ],
       en: [
-        'a classic video game code',
+        'a classic video game code, on the keyboard and outside the terminal',
         'up, up, down, down…',
         'press ↑ ↑ ↓ ↓ ← → ← → B A'
       ]
@@ -140,12 +140,12 @@ export const SECRETOS: Secreto[] = [
     nombre: { es: 'Hacker de consola', en: 'Console hacker' },
     pistas: {
       es: [
-        'los devs siempre abren la consola',
+        'este no está en la terminal de la página, sino en la consola del navegador',
         'F12, o clic derecho → inspeccionar',
         'en la consola escribe: secreto()'
       ],
       en: [
-        'devs always open the console',
+        'this one is not in the page terminal, but in the browser console',
         'F12, or right click → inspect',
         'in the console type: secret()'
       ]

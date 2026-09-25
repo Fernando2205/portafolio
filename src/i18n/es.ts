@@ -31,6 +31,7 @@ export const es = {
       logros: 'logros',
       proyectos: 'proyectos',
       terminal: 'terminal',
+      stack: 'stack',
       contacto: 'contacto'
     },
     /** Ruta que el logo muestra según la sección visible. */

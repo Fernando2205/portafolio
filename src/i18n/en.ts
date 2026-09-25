@@ -30,6 +30,7 @@ export const en: Diccionario = {
       logros: 'achievements',
       proyectos: 'projects',
       terminal: 'terminal',
+      stack: 'stack',
       contacto: 'contact'
     },
     rutas: {

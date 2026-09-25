@@ -28,6 +28,10 @@ export interface Eventos {
   ejecutar: string
   /** Invierte o restaura la gravedad del stack. */
   gravedad: number
+  /** Enciende el modo fiesta durante N milisegundos. */
+  fiesta: number
+  /** Las partículas forman una palabra durante N milisegundos. */
+  palabra: { texto: string, ms: number }
   /** Empuja un giro extra a la figura 3D. */
   girar: number
   /** El visor cambió de tamaño. */

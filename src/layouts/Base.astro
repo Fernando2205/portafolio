@@ -5,6 +5,7 @@ import { ACENTO_DORADO, PALETAS, PALETA_POR_DEFECTO } from '../data/paletas'
 import { TOTAL_SECRETOS } from '../data/secretos'
 import { CLAVES } from '../scripts/store'
 import Footer from '../components/Footer.astro'
+import ParticleCanvas from '../components/ParticleCanvas.astro'
 import { getLang, ruta, t } from '../i18n/utils'
 
 interface Props {
@@ -84,6 +85,8 @@ if(sessionStorage.getItem('delio-intro')==='hecha')r.dataset.intro='off';
     >
       {dic.nav.irAlContenido}
     </a>
+
+    <ParticleCanvas />
 
     <slot />
 

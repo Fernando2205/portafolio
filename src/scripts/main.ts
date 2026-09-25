@@ -10,6 +10,7 @@ import { iniciarTrayectoria } from './journey'
 import { iniciarLoader } from './loader'
 import { iniciarMarquesina } from './marquee'
 import { iniciarNav } from './nav'
+import { iniciarParticulas } from './particles'
 import { iniciarFisica } from './physics'
 import { iniciarProyectos } from './projects'
 import { iniciarScroll } from './scroll'
@@ -43,6 +44,7 @@ const modulos = [
   iniciarProyectos,
   iniciarFisica,
   iniciarContacto,
+  iniciarParticulas,
   iniciarScroll,
   iniciarLoader
 ]

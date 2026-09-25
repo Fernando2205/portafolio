@@ -93,13 +93,13 @@ export const SECRETOS: Secreto[] = [
     pistas: {
       es: [
         'no todo se escribe en la terminal',
-        'escribe mi nombre en cualquier parte de la página',
-        'haz clic fuera de la terminal y teclea: delio'
+        'sal de la terminal y teclea mi nombre de pila, sin usar ningún campo',
+        'haz clic en una zona vacía de la página y teclea: delio'
       ],
       en: [
         'not everything is typed in the terminal',
-        'type my name anywhere on the page',
-        'click outside the terminal and type: delio'
+        'leave the terminal and type my first name, with no field focused',
+        'click an empty area of the page and type: delio'
       ]
     }
   },
@@ -108,14 +108,14 @@ export const SECRETOS: Secreto[] = [
     nombre: { es: 'Modo desarrollador', en: 'Developer mode' },
     pistas: {
       es: [
-        'el logo no es solo un logo',
-        'los devs hacen clic muchas veces',
-        'haz clic 5 veces rápido en ~/delio'
+        'hay algo arriba que premia la insistencia',
+        '~/delio, arriba a la izquierda, no es solo texto',
+        'haz clic 5 veces seguidas y rápido en ~/delio'
       ],
       en: [
-        'the logo is not just a logo',
-        'devs click many times',
-        'click ~/delio 5 times, fast'
+        'something up top rewards insisting',
+        '~/delio, in the top left, is not just text',
+        'click ~/delio 5 times in a row, fast'
       ]
     }
   },

@@ -278,7 +278,7 @@ export const es = {
     gravedad: 'newton estaría orgulloso. el comando es otro, pero cerca.',
     konami: 'los clásicos no se escriben: se teclean con flechas, fuera de aquí.',
     nombre: 'ese nombre funciona mejor fuera de la terminal.',
-    dev: 'el logo de arriba guarda algo.',
+    dev: 'eso de arriba a la izquierda guarda algo.',
     consola: 'esa va en la consola del navegador, no aquí.',
     plural: 'casi: es en plural.',
     jugar: '¿quieres jugar? díselo a la terminal con un verbo.',

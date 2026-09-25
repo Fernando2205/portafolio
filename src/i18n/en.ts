@@ -272,7 +272,7 @@ export const en: Diccionario = {
     gravedad: 'newton would be proud. the command is different, but close.',
     konami: 'classics are not typed: they are pressed with arrows, outside of here.',
     nombre: 'that name works better outside the terminal.',
-    dev: 'the logo up top is hiding something.',
+    dev: 'that thing in the top left is hiding something.',
     consola: 'that one goes in the browser console, not here.',
     plural: 'almost: it is plural.',
     jugar: 'want to play? tell the terminal with a verb.',

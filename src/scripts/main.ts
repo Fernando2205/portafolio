@@ -3,6 +3,7 @@ import { iniciarSobre } from './about'
 import { iniciarLogros } from './achievements'
 import { limpiar } from './bus'
 import { iniciarReloj } from './clock'
+import { iniciarContacto } from './contact'
 import { iniciarCursor } from './cursor'
 import { iniciarHero } from './hero'
 import { iniciarTrayectoria } from './journey'
@@ -41,6 +42,7 @@ const modulos = [
   iniciarLogros,
   iniciarProyectos,
   iniciarFisica,
+  iniciarContacto,
   iniciarScroll,
   iniciarLoader
 ]

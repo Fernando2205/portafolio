@@ -1,0 +1,62 @@
+---
+import { PERFIL } from '../data/perfil'
+import { getLang, t } from '../i18n/utils'
+
+const dic = t(getLang(Astro.url))
+
+const enlaces = [
+  { texto: 'WhatsApp ↗', href: PERFIL.whatsapp, descarga: false },
+  { texto: 'LinkedIn ↗', href: PERFIL.linkedin, descarga: false },
+  { texto: 'GitHub ↗', href: PERFIL.github, descarga: false },
+  { texto: dic.contacto.descargarCv, href: PERFIL.cv, descarga: true }
+]
+---
+
+<section
+  id="contacto"
+  class="relative z-1 box-border flex min-h-[90vh] flex-col justify-center gap-10 border-t border-line pad-x pad-y"
+>
+  <div class="flex flex-col gap-5">
+    <div data-scramble class="font-mono text-[13px] text-mut">{dic.contacto.etiqueta}</div>
+    <div class="overflow-hidden pb-[.1em]">
+      <h2 data-h class="max-w-[14ch] text-h2-contacto text-balance">{dic.contacto.titulo}</h2>
+    </div>
+  </div>
+
+  <div data-reveal class="flex flex-col items-start gap-3">
+    <a
+      data-email
+      href={`mailto:${PERFIL.email}`}
+      data-cursor={dic.cursor.escribir}
+      class="inline-block text-email break-all text-acct underline decoration-2 underline-offset-[.15em]"
+    >
+      {PERFIL.email}
+    </a>
+
+    <button
+      type="button"
+      data-copiar-email
+      data-copiado={dic.contacto.copiado}
+      data-cursor={dic.cursor.copiar}
+      class="cursor-pointer border-0 bg-transparent p-0 font-mono text-[13px] text-mut hover:text-fg"
+    >
+      {dic.contacto.copiar}
+    </button>
+  </div>
+
+  <div data-reveal class="flex flex-wrap gap-x-8 gap-y-3 font-mono text-sm">
+    {
+      enlaces.map(enlace => (
+        <a
+          href={enlace.href}
+          target={enlace.descarga ? undefined : '_blank'}
+          rel={enlace.descarga ? undefined : 'noreferrer'}
+          download={enlace.descarga ? '' : undefined}
+          data-scramble-hover
+        >
+          {enlace.texto}
+        </a>
+      ))
+    }
+  </div>
+</section>

@@ -1,4 +1,5 @@
 import { TOTAL_SECRETOS } from '../data/secretos'
+import { iniciarSobre } from './about'
 import { limpiar } from './bus'
 import { iniciarReloj } from './clock'
 import { iniciarCursor } from './cursor'
@@ -6,6 +7,7 @@ import { iniciarHero } from './hero'
 import { iniciarLoader } from './loader'
 import { iniciarMarquesina } from './marquee'
 import { iniciarNav } from './nav'
+import { iniciarScroll } from './scroll'
 import { CLAVES, leerJson } from './store'
 import { inicializarTema } from './theme'
 
@@ -30,6 +32,8 @@ const modulos = [
   iniciarReloj,
   iniciarHero,
   iniciarMarquesina,
+  iniciarSobre,
+  iniciarScroll,
   iniciarLoader
 ]
 

@@ -1,0 +1,98 @@
+---
+import { Image } from 'astro:assets'
+import { HABILIDADES_BLANDAS } from '../data/habilidades'
+import { FOTO_PERFIL } from '../data/imagenes'
+import { getLang, t } from '../i18n/utils'
+
+const lang = getLang(Astro.url)
+const dic = t(lang)
+
+const datos = [dic.sobre.datos.construyendo, dic.sobre.datos.explorando, dic.sobre.datos.idiomas]
+---
+
+<section id="sobre-mi" class="relative z-1 pad-x pad-y">
+  <div
+    class="grid max-w-[1400px] items-start gap-[clamp(40px,6vw,96px)]"
+    style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))"
+  >
+    <div class="flex flex-col gap-5">
+      <div data-scramble class="font-mono text-[13px] text-mut">{dic.sobre.etiqueta}</div>
+
+      <div
+        data-foto
+        class="relative aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-tarjeta"
+      >
+        {
+          FOTO_PERFIL
+            ? (
+                <Image
+                  src={FOTO_PERFIL}
+                  alt={dic.sobre.fotoAlt}
+                  widths={[420, 840]}
+                  sizes="(max-width: 640px) 100vw, 420px"
+                  class="h-full w-full object-cover"
+                />
+              )
+            : (
+                <div
+                  class="flex h-full w-full items-center justify-center rounded-tarjeta border border-dashed border-line bg-card font-mono text-xs text-mut"
+                >
+                  {dic.sobre.fotoPendiente}
+                </div>
+              )
+        }
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-14">
+      <p data-sobre class="text-sobre">{dic.sobre.parrafo}</p>
+
+      <div
+        data-reveal
+        class="grid gap-6 border-t border-line pt-7"
+        style="grid-template-columns:repeat(auto-fit,minmax(180px,1fr))"
+      >
+        {
+          datos.map(dato => (
+            <div class="flex flex-col gap-2">
+              <span class="font-mono text-xs text-mut">{dato.clave}</span>
+              <span class="text-[19px]">{dato.valor}</span>
+            </div>
+          ))
+        }
+      </div>
+
+      <div class="flex flex-col gap-[18px]">
+        <div class="flex flex-wrap items-baseline justify-between gap-2">
+          <span class="font-mono text-xs text-mut">{dic.sobre.comoTrabajo}</span>
+          <button
+            type="button"
+            data-ir-habilidades={dic.sobre.comandoHabilidades}
+            class="cursor-pointer border-0 bg-transparent p-0 font-mono text-xs text-acct"
+          >
+            {`~ $ ${dic.sobre.comandoHabilidades} →`}
+          </button>
+        </div>
+
+        <div
+          class="grid border-t border-line"
+          style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))"
+        >
+          {
+            HABILIDADES_BLANDAS.map((habilidad, i) => (
+              <div
+                data-soft
+                class="flex items-baseline gap-3.5 border-b border-line py-4 pr-3"
+              >
+                <span class="font-mono text-[11px] text-acct">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span class="text-xl tracking-[-.01em]">{habilidad.nombre[lang]}</span>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

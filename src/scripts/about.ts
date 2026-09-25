@@ -29,15 +29,8 @@ export function iniciarSobre () {
           scrollTrigger: { trigger: foto, start: 'top 82%' }
         }
       )
-      gsap.fromTo(
-        foto,
-        { y: 70 },
-        {
-          y: -70,
-          ease: 'none',
-          scrollTrigger: { trigger: foto, start: 'top bottom', end: 'bottom top', scrub: true }
-        }
-      )
+      // Sin parallax: la columna va pegada (`md:sticky`) y moverla ±70px la
+      // sacaría de su sitio mientras está fija.
     })
     bajas.push(() => contexto.revert())
   }

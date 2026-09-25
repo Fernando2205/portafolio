@@ -142,6 +142,15 @@ Cloudflare Pages (o Vercel/Netlify) desde GitHub:
 - **El botón ES/EN no redirige automáticamente.** Guarda la preferencia en
   `localStorage['delio-lang']`, pero entrar en `/` siempre muestra español: un
   redirect automático perjudica el SEO y sorprende a quien llega desde un enlace.
+- **La foto de «sobre mí» va pegada en lugar de con parallax.** El handoff pide
+  un parallax de ±70px, pero con el diseño a dos columnas la izquierda se
+  quedaba corta y dejaba medio ancho vacío al bajar. Pegarla lo resuelve, y los
+  dos efectos competían por lo mismo. El revelado con `clip-path` se mantiene.
+- **El bloque «cómo trabajo» ocupa todo el ancho**, fuera de la rejilla de dos
+  columnas: dentro de la derecha las seis habilidades se partían en dos líneas.
+- **El CV se ve en la página antes de descargarlo.** El handoff solo pide el
+  enlace de descarga; abrirlo en un visor deja ver el PDF sin bajarlo, y la
+  descarga sigue estando dentro.
 - **Con `prefers-reduced-motion` el 3D no se carga**, en lugar de mostrarse
   quieto. Evita descargar Three.js a quien pidió menos movimiento.
 

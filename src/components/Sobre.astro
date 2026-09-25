@@ -10,12 +10,25 @@ const dic = t(lang)
 const datos = [dic.sobre.datos.construyendo, dic.sobre.datos.explorando, dic.sobre.datos.idiomas]
 ---
 
-<section id="sobre-mi" class="relative z-1 pad-x pad-y">
+{/*
+  Padding vertical partido en vez del `pad-y` común: la sección termina con la
+  rejilla de habilidades, que ya cierra con su propia línea, así que los 180px
+  de abajo dejaban un vacío grande entre esa línea y la de la sección siguiente.
+*/}
+<section
+  id="sobre-mi"
+  class="relative z-1 pad-x pt-[clamp(100px,14vw,180px)] pb-[clamp(56px,7vw,104px)]"
+>
   <div
     class="grid max-w-[1400px] items-start gap-[clamp(40px,6vw,96px)]"
     style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr))"
   >
-    <div class="flex flex-col gap-5">
+    {/*
+      La columna de la foto se queda fija mientras se recorre el texto. Solo a
+      partir de md, que es cuando la rejilla tiene dos columnas de verdad: en
+      una sola columna, pegar la foto arriba no tendría sentido.
+    */}
+    <div class="flex flex-col gap-5 md:sticky md:top-28">
       <div data-scramble class="font-mono text-[13px] text-mut">{dic.sobre.etiqueta}</div>
 
       <div
@@ -61,38 +74,44 @@ const datos = [dic.sobre.datos.construyendo, dic.sobre.datos.explorando, dic.sob
           ))
         }
       </div>
+    </div>
+  </div>
 
-      <div class="flex flex-col gap-[18px]">
-        <div class="flex flex-wrap items-baseline justify-between gap-2">
-          <span class="font-mono text-xs text-mut">{dic.sobre.comoTrabajo}</span>
-          <button
-            type="button"
-            data-ir-habilidades={dic.sobre.comandoHabilidades}
-            class="cursor-pointer border-0 bg-transparent p-0 font-mono text-xs text-acct"
-          >
-            {`~ $ ${dic.sobre.comandoHabilidades} →`}
-          </button>
-        </div>
+  {/*
+    «Cómo trabajo» sale de la rejilla y ocupa todo el ancho: dentro de la
+    columna derecha las seis habilidades se partían en dos líneas y dejaban
+    medio ancho vacío a la izquierda.
+  */}
+  <div class="mt-[clamp(56px,7vw,112px)] flex max-w-[1400px] flex-col gap-[18px]">
+    <div class="flex flex-wrap items-baseline justify-between gap-2">
+      <span class="font-mono text-xs text-mut">{dic.sobre.comoTrabajo}</span>
+      <button
+        type="button"
+        data-ir-habilidades={dic.sobre.comandoHabilidades}
+        class="cursor-pointer border-0 bg-transparent p-0 font-mono text-xs text-acct"
+      >
+        {`~ $ ${dic.sobre.comandoHabilidades} →`}
+      </button>
+    </div>
 
-        <div
-          class="grid border-t border-line"
-          style="grid-template-columns:repeat(auto-fill,minmax(200px,1fr))"
-        >
-          {
-            HABILIDADES_BLANDAS.map((habilidad, i) => (
-              <div
-                data-soft
-                class="flex items-baseline gap-3.5 border-b border-line py-4 pr-3"
-              >
-                <span class="font-mono text-[11px] text-acct">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <span class="text-xl tracking-[-.01em]">{habilidad.nombre[lang]}</span>
-              </div>
-            ))
-          }
-        </div>
-      </div>
+    {/*
+      auto-fit y no auto-fill: con seis habilidades a todo el ancho, auto-fill
+      dejaría una columna vacía al final en vez de repartir el espacio.
+    */}
+    <div
+      class="grid border-t border-line"
+      style="grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))"
+    >
+      {
+        HABILIDADES_BLANDAS.map((habilidad, i) => (
+          <div data-soft class="flex items-baseline gap-3.5 border-b border-line py-4 pr-3">
+            <span class="font-mono text-[11px] text-acct">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span class="text-xl tracking-[-.01em]">{habilidad.nombre[lang]}</span>
+          </div>
+        ))
+      }
     </div>
   </div>
 </section>

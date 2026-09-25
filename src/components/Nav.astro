@@ -37,7 +37,12 @@ if(e)e.textContent=n>=${TOTAL_SECRETOS}?'★ ${TOTAL_SECRETOS}/${TOTAL_SECRETOS}
   style="background:color-mix(in srgb,var(--bg) 72%,transparent)"
   aria-label={dic.nav.etiqueta}
 >
-  <a href="#inicio" data-logo class="flex font-medium whitespace-nowrap">
+  <a
+    href="#inicio"
+    data-logo
+    data-cursor={dic.cursor.inicio}
+    class="flex font-medium whitespace-nowrap"
+  >
     <span>~/delio</span>
     <span class="text-acct" data-ruta-seccion></span>
     <span class="animate-parpadeo text-acc" aria-hidden="true">_</span>

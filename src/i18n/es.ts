@@ -146,6 +146,7 @@ export const es = {
 
   /** Etiquetas de la pastilla del cursor personalizado. */
   cursor: {
+    inicio: 'inicio',
     escribir: 'escribir',
     abrir: 'abrir',
     cerrar: 'cerrar',

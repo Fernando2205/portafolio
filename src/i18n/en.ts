@@ -143,6 +143,7 @@ export const en: Diccionario = {
   },
 
   cursor: {
+    inicio: 'home',
     escribir: 'write',
     abrir: 'open',
     cerrar: 'close',

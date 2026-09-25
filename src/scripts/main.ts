@@ -1,6 +1,7 @@
 import { TOTAL_SECRETOS } from '../data/secretos'
 import { limpiar } from './bus'
 import { iniciarReloj } from './clock'
+import { iniciarCursor } from './cursor'
 import { CLAVES, leerJson } from './store'
 import { inicializarTema } from './theme'
 
@@ -23,6 +24,7 @@ function iniciar () {
   inicializarTema(secretos.length, TOTAL_SECRETOS)
 
   bajas.push(iniciarReloj())
+  bajas.push(iniciarCursor())
 }
 
 function destruir () {

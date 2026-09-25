@@ -1,0 +1,21 @@
+---
+/*
+  Cursor personalizado: un punto de acento y un anillo que lo persigue.
+  Arranca oculto y solo lo enciende cursor.ts cuando hay `pointer: fine`, para
+  que en táctil no se vea nada y el cursor nativo se quede como está.
+*/
+---
+
+<div
+  data-cursor-punto
+  class="pointer-events-none fixed top-0 left-0 z-400 -mt-1 -ml-1 hidden h-2 w-2 rounded-full bg-acc"
+>
+</div>
+
+<div
+  data-cursor-anillo
+  class="pointer-events-none fixed top-0 left-0 z-399 hidden items-center justify-center rounded-full border border-mut font-mono text-[11px] text-onacc"
+  style="width:36px;height:36px;margin:-18px 0 0 -18px;transition:width .25s ease,height .25s ease,margin .25s ease,background-color .25s ease,border-color .25s ease"
+>
+  <span data-cursor-etiqueta></span>
+</div>

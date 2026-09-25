@@ -166,6 +166,11 @@ html.vt-circulo::view-transition-new(root) {
   animation-duration: .45s;
 }
 
+/* La intro de carga solo se ve una vez por sesión. */
+html[data-intro='off'] [data-cargador] {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

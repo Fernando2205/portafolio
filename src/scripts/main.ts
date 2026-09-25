@@ -2,6 +2,7 @@ import { TOTAL_SECRETOS } from '../data/secretos'
 import { limpiar } from './bus'
 import { iniciarReloj } from './clock'
 import { iniciarCursor } from './cursor'
+import { iniciarLoader } from './loader'
 import { CLAVES, leerJson } from './store'
 import { inicializarTema } from './theme'
 
@@ -23,6 +24,7 @@ function iniciar () {
   const secretos = leerJson<string[]>(CLAVES.secretos, [])
   inicializarTema(secretos.length, TOTAL_SECRETOS)
 
+  bajas.push(iniciarLoader())
   bajas.push(iniciarReloj())
   bajas.push(iniciarCursor())
 }
@@ -35,7 +37,12 @@ function destruir () {
 }
 
 document.addEventListener('astro:page-load', iniciar)
-document.addEventListener('astro:before-swap', destruir)
+document.addEventListener('astro:before-swap', evento => {
+  destruir()
+  // Al cambiar de idioma no se repite la intro: se quita del documento
+  // entrante antes del swap para que no haya ni un parpadeo.
+  evento.newDocument.querySelector('[data-cargador]')?.remove()
+})
 
 // Red de seguridad: si el módulo llegara tarde al evento inicial.
 if (document.readyState !== 'loading') iniciar()

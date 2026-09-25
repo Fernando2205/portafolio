@@ -1,0 +1,45 @@
+---
+import { getLang, t } from '../i18n/utils'
+
+const dic = t(getLang(Astro.url))
+
+/*
+  Umbrales de porcentaje a los que aparece cada línea de arranque. Las cinco
+  líneas se renderizan en el servidor y loader.ts solo les quita el `hidden`.
+*/
+const UMBRALES = [0, 20, 45, 70, 96]
+---
+
+<div
+  data-cargador
+  class="fixed inset-0 z-300 flex flex-col justify-end bg-bg pad-x py-0 font-mono text-sm text-fg"
+  style="padding-top:clamp(20px,5vw,64px);padding-bottom:clamp(20px,5vw,64px);transition:opacity .6s ease"
+>
+  <div class="flex flex-col gap-1.5 text-mut">
+    {
+      dic.loader.lineas.map((linea, i) => (
+        <div data-boot={UMBRALES[i]} hidden={UMBRALES[i] > 0}>{`> ${linea}`}</div>
+      ))
+    }
+  </div>
+
+  <div
+    class="mt-7 flex items-baseline gap-4 whitespace-nowrap"
+    style="font-size:clamp(26px,5vw,64px);letter-spacing:-.02em"
+  >
+    <span class="font-medium text-acc">~ $</span>
+    <span class="tabular-nums">{dic.loader.cargando} <span data-pct>0</span>%</span>
+  </div>
+
+  <div class="mt-6 h-0.5 bg-line">
+    <div data-barra class="h-full w-0 bg-acc" style="transition:width .1s linear"></div>
+  </div>
+
+  <div class="mt-4 text-xs text-mut">{dic.loader.saltar}</div>
+</div>
+
+<noscript>
+  <style>
+    [data-cargador] { display: none !important; }
+  </style>
+</noscript>

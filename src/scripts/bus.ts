@@ -6,6 +6,8 @@ import type { NombrePaleta } from '../data/paletas'
  * reaccionar a cambios: publican y escuchan aquí.
  */
 export interface Eventos {
+  /** La intro de carga terminó (o no había). */
+  introFin: void
   /** Cambió la sección visible. El valor es el id de la <section>. */
   seccion: string
   /** Cambió la paleta, el modo claro/oscuro o el acento. */

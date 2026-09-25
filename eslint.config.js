@@ -38,7 +38,10 @@ export default [
     rules: {
       ...reglasJsxApagadas,
       // En HTML no todos los elementos vacíos pueden autocerrarse.
-      'react/self-closing-comp': 'off'
+      'react/self-closing-comp': 'off',
+      // Astro renderiza en el servidor: sus listas no necesitan `key`.
+      'react/jsx-key': 'off',
+      'react/no-unknown-property': 'off'
     }
   }
 ]

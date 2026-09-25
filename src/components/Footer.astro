@@ -1,0 +1,16 @@
+---
+import { getLang, t } from '../i18n/utils'
+
+const dic = t(getLang(Astro.url))
+---
+
+<footer
+  class="relative z-1 flex flex-wrap justify-between gap-3 border-t border-line bg-bg pad-x py-7 font-mono text-xs text-mut"
+>
+  <span>{dic.pie.copyright}</span>
+  <span>{dic.pie.psst}</span>
+  <span class="flex gap-1.5">
+    <span>{dic.pie.ciudad}</span>
+    <span data-reloj></span>
+  </span>
+</footer>

@@ -1,0 +1,96 @@
+---
+import { ClientRouter } from 'astro:transitions'
+import '../styles/global.css'
+import { ACENTO_DORADO, PALETAS, PALETA_POR_DEFECTO } from '../data/paletas'
+import { TOTAL_SECRETOS } from '../data/secretos'
+import { CLAVES } from '../scripts/store'
+import Footer from '../components/Footer.astro'
+import { getLang, ruta, t } from '../i18n/utils'
+
+interface Props {
+  /** Pon `false` para entrar directo al sitio, sin la intro de carga. */
+  conIntro?: boolean
+}
+
+const { conIntro = true } = Astro.props
+
+const lang = getLang(Astro.url)
+const dic = t(lang)
+
+const urlEs = new URL('/', Astro.site)
+const urlEn = new URL('/en/', Astro.site)
+const canonica = new URL(ruta(lang), Astro.site)
+
+/*
+  Aplica la paleta guardada antes del primer paint para que no haya parpadeo.
+  Duplica a propósito el cálculo de src/scripts/theme.ts: es la única forma de
+  tenerlo listo antes de que el navegador pinte. Si cambias cómo se derivan
+  --acct o --onacc, cámbialo en los dos sitios.
+*/
+const scriptTema = `(function(){try{
+var P=${JSON.stringify(PALETAS)},r=document.documentElement;
+var n=localStorage.getItem('${CLAVES.paleta}');if(!n||!P[n])n=${JSON.stringify(PALETA_POR_DEFECTO)};
+var oscuro=localStorage.getItem('${CLAVES.tema}')!=='light';
+var s=[];try{s=JSON.parse(localStorage.getItem('${CLAVES.secretos}')||'[]')}catch(e){}
+var dorado=localStorage.getItem('${CLAVES.dorado}')==='1'&&s.length>=${TOTAL_SECRETOS};
+var p=P[n],tono=oscuro?p.dark:p.light,acc=dorado?'${ACENTO_DORADO}':p.acc;
+r.style.setProperty('--bg',tono.bg);r.style.setProperty('--fg',tono.fg);
+r.style.setProperty('--mut',tono.mut);r.style.setProperty('--line',tono.line);
+r.style.setProperty('--card',tono.card);r.style.setProperty('--onacc',p.dark.bg);
+r.style.setProperty('--acc',acc);
+r.style.setProperty('--acct',oscuro?acc:'color-mix(in oklch, '+acc+' 55%, '+tono.fg+')');
+r.dataset.tema=oscuro?'dark':'light';
+if(sessionStorage.getItem('delio-intro')==='hecha')r.dataset.intro='off';
+}catch(e){}})()`
+---
+
+<!doctype html>
+<html lang={lang} data-tema="dark" data-intro={conIntro ? 'on' : 'off'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{dic.meta.titulo}</title>
+    <meta name="description" content={dic.meta.descripcion} />
+    <meta name="author" content="Delio Fernando Palacios" />
+    <meta name="theme-color" content={PALETAS[PALETA_POR_DEFECTO].dark.bg} />
+
+    <link rel="canonical" href={canonica.href} />
+    <link rel="alternate" hreflang="es" href={urlEs.href} />
+    <link rel="alternate" hreflang="en" href={urlEn.href} />
+    <link rel="alternate" hreflang="x-default" href={urlEs.href} />
+
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Delio Palacios" />
+    <meta property="og:locale" content={lang === 'es' ? 'es_CO' : 'en_US'} />
+    <meta property="og:locale:alternate" content={lang === 'es' ? 'en_US' : 'es_CO'} />
+    <meta property="og:title" content={dic.meta.titulo} />
+    <meta property="og:description" content={dic.meta.descripcion} />
+    <meta property="og:url" content={canonica.href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={dic.meta.titulo} />
+    <meta name="twitter:description" content={dic.meta.descripcion} />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="/favicon.ico" sizes="32x32" />
+
+    <script is:inline set:html={scriptTema} />
+    <ClientRouter />
+  </head>
+
+  <body>
+    <a
+      href="#contenido"
+      class="sr-only focus-visible:not-sr-only focus-visible:fixed focus-visible:top-4 focus-visible:left-4 focus-visible:z-500 focus-visible:rounded-full focus-visible:bg-acc focus-visible:px-4 focus-visible:py-2 focus-visible:font-mono focus-visible:text-[13px] focus-visible:text-onacc"
+    >
+      {dic.nav.irAlContenido}
+    </a>
+
+    <slot />
+
+    <Footer />
+
+    <script>
+      import '../scripts/main'
+    </script>
+  </body>
+</html>

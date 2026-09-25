@@ -156,6 +156,10 @@ export function iniciarFisica () {
 
   bajas.push(on('medir', () => {
     for (const pastilla of pastillas) {
+      // Las pastillas son más pequeñas en móvil: al cruzar el punto de ruptura
+      // hay que volver a medirlas o las paredes y los choques se desajustan.
+      pastilla.w = pastilla.el.offsetWidth
+      pastilla.h = pastilla.el.offsetHeight
       pastilla.x = Math.max(0, Math.min(pastilla.x, caja.clientWidth - pastilla.w))
     }
   }))

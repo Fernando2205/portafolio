@@ -1,0 +1,98 @@
+---
+import { getLang, t } from '../i18n/utils'
+
+const dic = t(getLang(Astro.url))
+
+/*
+  Las tres líneas de bienvenida se renderizan en el servidor con las mismas
+  clases que usa terminal.ts al imprimir, para que el historial sea homogéneo.
+*/
+const bienvenida = dic.terminal.bienvenida.map((texto, i) => ({
+  texto,
+  clase: i === 2 ? 'text-acct' : 'text-mut'
+}))
+---
+
+<section id="terminal" class="relative z-1 border-t border-line pad-x pad-y">
+  <div class="mb-12 flex flex-col gap-4">
+    <div data-scramble class="font-mono text-[13px] text-mut">{dic.terminal.etiqueta}</div>
+    <div class="overflow-hidden pb-[.1em]">
+      <h2 data-h class="text-h2">{dic.terminal.titulo}</h2>
+    </div>
+  </div>
+
+  <div data-reveal class="max-w-[920px]">
+    <div
+      data-terminal-ventana
+      data-cursor={dic.cursor.escribe}
+      class="overflow-hidden rounded-tarjeta border border-line bg-card shadow-terminal"
+    >
+      <div class="flex items-center gap-2 border-b border-line px-[18px] py-3.5">
+        <span class="h-[11px] w-[11px] rounded-full bg-line" aria-hidden="true"></span>
+        <span class="h-[11px] w-[11px] rounded-full bg-line" aria-hidden="true"></span>
+        <span class="h-[11px] w-[11px] rounded-full bg-acc" aria-hidden="true"></span>
+        <span class="ml-2.5 font-mono text-xs text-mut">{dic.terminal.barra}</span>
+        <span
+          class="ml-auto rounded-md border border-line px-[7px] py-0.5 font-mono text-[11px] text-mut"
+        >
+          {dic.terminal.autocompletar}
+        </span>
+      </div>
+
+      <div
+        data-terminal-cuerpo
+        class="h-[400px] overflow-auto px-[22px] py-5 font-mono text-sm leading-[1.7]"
+      >
+        <div
+          data-terminal-historial
+          aria-live="polite"
+          aria-label={dic.terminal.historial}
+        >
+          {
+            bienvenida.map(linea => (
+              <div class={`whitespace-pre-wrap ${linea.clase}`}>{linea.texto}</div>
+            ))
+          }
+        </div>
+
+        <div class="flex items-center gap-2.5">
+          <span data-terminal-prompt class="text-acct">~ $</span>
+
+          <div class="relative flex min-w-0 flex-1">
+            <div
+              aria-hidden="true"
+              class="pointer-events-none absolute inset-0 overflow-hidden whitespace-pre text-mut opacity-55"
+            >
+              <span data-terminal-eco class="invisible"></span><span data-terminal-fantasma></span>
+            </div>
+
+            <input
+              data-terminal-input
+              type="text"
+              aria-label={dic.terminal.entrada}
+              placeholder={dic.terminal.placeholder}
+              spellcheck="false"
+              autocomplete="off"
+              class="relative w-full min-w-0 border-0 bg-transparent p-0 text-fg outline-none"
+              style="caret-color:var(--acc)"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div data-reveal class="mt-5 flex max-w-[920px] flex-wrap gap-2.5">
+    {
+      dic.terminal.sugerencias.map(sugerencia => (
+        <button
+          type="button"
+          data-sugerencia={sugerencia}
+          class="cursor-pointer rounded-full border border-line bg-transparent px-4 py-2 font-mono text-[13px] text-mut hover:border-acc hover:text-fg"
+        >
+          {sugerencia}
+        </button>
+      ))
+    }
+  </div>
+</section>

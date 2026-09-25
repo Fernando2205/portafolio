@@ -5,6 +5,7 @@ import { limpiar } from './bus'
 import { iniciarReloj } from './clock'
 import { iniciarContacto } from './contact'
 import { iniciarCursor } from './cursor'
+import { iniciarHuevos } from './eggs'
 import { iniciarHero } from './hero'
 import { iniciarTrayectoria } from './journey'
 import { iniciarLoader } from './loader'
@@ -13,7 +14,9 @@ import { iniciarNav } from './nav'
 import { iniciarParticulas } from './particles'
 import { iniciarFisica } from './physics'
 import { iniciarProyectos } from './projects'
+import { cargarSecretos } from './secrets'
 import { iniciarScroll } from './scroll'
+import { iniciarTerminal } from './terminal'
 import { CLAVES, leerJson } from './store'
 import { inicializarTema } from './theme'
 
@@ -45,6 +48,8 @@ const modulos = [
   iniciarFisica,
   iniciarContacto,
   iniciarParticulas,
+  iniciarTerminal,
+  iniciarHuevos,
   iniciarScroll,
   iniciarLoader
 ]
@@ -53,6 +58,7 @@ function iniciar () {
   if (iniciado) return
   iniciado = true
 
+  cargarSecretos()
   const secretos = leerJson<string[]>(CLAVES.secretos, [])
   inicializarTema(secretos.length, TOTAL_SECRETOS)
 

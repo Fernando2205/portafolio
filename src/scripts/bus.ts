@@ -22,6 +22,8 @@ export interface Eventos {
   recompensa: void
   /** Imprime líneas en la terminal desde fuera de ella. */
   imprimir: Array<{ tipo: 'in' | 'out' | 'acc', texto: string }>
+  /** Abre el panel de un proyecto por su slug y baja hasta él. */
+  abrirProyecto: string
   /** Ejecuta un comando en la terminal. */
   ejecutar: string
   /** Invierte o restaura la gravedad del stack. */

@@ -1,0 +1,88 @@
+---
+import { LOGROS_SECUNDARIOS, LOGRO_DESTACADO } from '../data/logros'
+import { getLang, t } from '../i18n/utils'
+
+const lang = getLang(Astro.url)
+const dic = t(lang)
+---
+
+<section id="logros" class="relative z-1 border-t border-line pad-x pad-y">
+  <div class="mb-12 flex flex-col gap-4">
+    <div data-scramble class="font-mono text-[13px] text-mut">{dic.logros.etiqueta}</div>
+    <div class="overflow-hidden pb-[.1em]">
+      <h2 data-h class="text-h2">{dic.logros.titulo}</h2>
+    </div>
+  </div>
+
+  {
+    LOGRO_DESTACADO && (
+      <div
+        data-reveal
+        class="relative mb-6 grid items-end gap-[clamp(24px,4vw,56px)] overflow-hidden rounded-logro border border-acc p-[clamp(24px,4vw,48px)]"
+        style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));background:color-mix(in srgb,var(--acc) 7%,var(--card))"
+      >
+        <div class="flex flex-col gap-3.5">
+          <span
+            class="self-start rounded-full bg-acc px-3.5 py-1.5 font-mono text-xs font-medium text-onacc"
+          >
+            {`${LOGRO_DESTACADO.resultado[lang]} · ${LOGRO_DESTACADO.anio}`}
+          </span>
+          <div
+            data-logro-numero
+            class="text-[clamp(96px,16vw,220px)] leading-[.8] font-semibold tracking-[-.06em] text-acct"
+            aria-hidden="true"
+          >
+            #1
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-3.5">
+          <div class="font-mono text-[13px] text-mut">{LOGRO_DESTACADO.evento[lang]}</div>
+          <div class="text-[clamp(36px,5vw,64px)] leading-none tracking-[-.03em]">
+            {LOGRO_DESTACADO.titulo}
+          </div>
+          <p class="max-w-[44ch] text-lg leading-[1.5]">{LOGRO_DESTACADO.descripcion[lang]}</p>
+          {LOGRO_DESTACADO.repo && (
+            <a
+              href={LOGRO_DESTACADO.repo}
+              target="_blank"
+              rel="noreferrer"
+              data-cursor={dic.cursor.ver}
+              class="self-start font-mono text-sm text-acct"
+            >
+              {`${dic.logros.codigo} ↗`}
+            </a>
+          )}
+        </div>
+      </div>
+    )
+  }
+
+  <div
+    class="grid gap-4"
+    style="grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))"
+  >
+    {
+      LOGROS_SECUNDARIOS.map(logro => {
+        const Etiqueta = logro.proyecto ? 'button' : 'div'
+        return (
+          <Etiqueta
+            data-ach
+            type={logro.proyecto ? 'button' : undefined}
+            data-ir-proyecto={logro.proyecto}
+            data-cursor={logro.proyecto ? dic.cursor.ver : undefined}
+            class={`flex flex-col gap-3 rounded-tarjeta border border-line bg-card p-6 text-left transition-[border-color,transform] duration-300 ease-suave hover:border-acc hover:-translate-y-1 ${logro.proyecto ? 'cursor-pointer' : ''}`}
+          >
+            <div class="flex justify-between gap-3 font-mono text-xs">
+              <span class="text-acct">{logro.resultado[lang]}</span>
+              <span class="text-mut">{logro.anio}</span>
+            </div>
+            <div class="text-[28px] leading-[1.05] tracking-[-.02em]">{logro.titulo}</div>
+            <div class="font-mono text-xs text-mut">{logro.evento[lang]}</div>
+            <p class="text-[15px] leading-[1.5] text-fg">{logro.descripcion[lang]}</p>
+          </Etiqueta>
+        )
+      })
+    }
+  </div>
+</section>

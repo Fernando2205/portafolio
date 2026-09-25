@@ -1,5 +1,6 @@
 import { TOTAL_SECRETOS } from '../data/secretos'
 import { iniciarSobre } from './about'
+import { iniciarLogros } from './achievements'
 import { limpiar } from './bus'
 import { iniciarReloj } from './clock'
 import { iniciarCursor } from './cursor'
@@ -35,6 +36,7 @@ const modulos = [
   iniciarMarquesina,
   iniciarSobre,
   iniciarTrayectoria,
+  iniciarLogros,
   iniciarScroll,
   iniciarLoader
 ]

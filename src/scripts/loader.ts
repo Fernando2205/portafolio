@@ -50,6 +50,7 @@ function montar (cargador: HTMLElement) {
 
   let pct = 0
   let terminado = false
+  const salidas: number[] = []
 
   const intervalo = window.setInterval(avanzar, 35)
 
@@ -73,12 +74,12 @@ function montar (cargador: HTMLElement) {
     window.clearInterval(intervalo)
     marcarVista()
 
-    window.setTimeout(() => { cargador.style.opacity = '0' }, 250)
-    window.setTimeout(() => {
+    salidas.push(window.setTimeout(() => { cargador.style.opacity = '0' }, 250))
+    salidas.push(window.setTimeout(() => {
       cargador.remove()
       document.documentElement.dataset.intro = 'off'
       emit('introFin')
-    }, 850)
+    }, 850))
   }
 
   function saltar () {
@@ -92,6 +93,7 @@ function montar (cargador: HTMLElement) {
 
   return () => {
     window.clearInterval(intervalo)
+    for (const salida of salidas) window.clearTimeout(salida)
     cargador.removeEventListener('click', saltar)
   }
 }

@@ -9,6 +9,7 @@ import { iniciarHuevos } from './eggs'
 import { iniciarHero } from './hero'
 import { iniciarTrayectoria } from './journey'
 import { iniciarLoader } from './loader'
+import { invalidarLayout } from './loop'
 import { iniciarMarquesina } from './marquee'
 import { iniciarNav } from './nav'
 import { iniciarParticulas } from './particles'
@@ -59,6 +60,7 @@ function iniciar () {
 
   cargarSecretos()
   inicializarTema(totalEncontrados(), TOTAL_SECRETOS)
+  invalidarLayout()
 
   for (const modulo of modulos) bajas.push(modulo())
 }

@@ -42,6 +42,16 @@ let raf = 0
 let ultimoY = 0
 let escuchando = false
 
+/**
+ * Marca el layout como sucio. Hace falta tras un swap del ClientRouter: el bucle
+ * sigue corriendo y ya habría limpiado las banderas, así que las tareas nuevas
+ * no sabrían que tienen que medir.
+ */
+export function invalidarLayout () {
+  marco.scrollSucio = true
+  marco.rectSucio = true
+}
+
 /** Registra una tarea de frame. Devuelve la función para darla de baja. */
 export function alFrame (tarea: Tarea) {
   tareas.add(tarea)

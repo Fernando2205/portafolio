@@ -57,6 +57,19 @@ const archivo = PERFIL.cv.split('/').pop()
 
 <style>
   /*
+    Cerrado, fuera del flujo. El navegador ya da `display:none` a un <dialog>
+    sin [open], pero la utilidad `flex` de las clases lo pisa, porque el estilo
+    del autor gana al del agente de usuario. Sin esta regla el visor seguía
+    ocupando sitio: como el <dialog> es `position:absolute`, sus 88vh se
+    extendían por debajo del footer y alargaban la página, y el iframe de
+    dentro se tragaba el puntero (el cursor personalizado se congelaba y
+    reaparecía el del sistema).
+  */
+  dialog[data-visor-cv]:not([open]) {
+    display: none;
+  }
+
+  /*
     Entrada con fundido. `@starting-style` y `allow-discrete` hacen que también
     se anime al abrir, no solo al cerrar; donde no haya soporte, aparece de
     golpe y ya.

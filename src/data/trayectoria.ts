@@ -83,6 +83,17 @@ export const TRAYECTORIA: ItemTrayectoria[] = [
   {
     anio: '2025',
     tipo: 'cert',
+    titulo: 'Full Stack Empresarial con Spring Boot y Angular',
+    url: 'https://profiles.badgeclaimed.com/user-9434/badges/urn:uuid:de780537-70a5-4829-b476-1d622564c9da.html',
+    subtitulo: { es: 'Dev Senior Code', en: 'Dev Senior Code' },
+    detalle: {
+      es: ['Certificación en desarrollo Full Stack con Spring Boot y Angular.'],
+      en: ['Certification in Full Stack development with Spring Boot and Angular.']
+    }
+  },
+  {
+    anio: '2025',
+    tipo: 'cert',
     titulo: 'Desarrollo de aplicaciones en la nube con Python',
     url: 'https://www.coursera.org/account/accomplishments/verify/6RCSHKNPRC9S',
     subtitulo: { es: 'Amazon Web Services', en: 'Amazon Web Services' },

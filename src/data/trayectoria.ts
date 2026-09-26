@@ -61,12 +61,23 @@ export const TRAYECTORIA: ItemTrayectoria[] = [
   {
     anio: '2026',
     tipo: 'cert',
-    titulo: 'NSE 1 · Ciberseguridad',
-    url: 'https://www.credly.com/badges/b0ac16d1-2434-4a5d-b5b4-0a92a8b0d08b/',
+    titulo: 'NSE 2 · Ciberseguridad',
+    url: 'https://www.credly.com/badges/8fa67c72-57f0-421d-b9e0-016516a53ece/public_url',
     subtitulo: { es: 'Fortinet', en: 'Fortinet' },
     detalle: {
-      es: ['Certificación en fundamentos de ciberseguridad.'],
-      en: ['Certification in cybersecurity fundamentals.']
+      es: ['Certificación en introducción a firewall de próxima generación y seguridad de red.'],
+      en: ['Certification in next-generation firewall and network security introduction.']
+    }
+  },
+  {
+    anio: '2026',
+    tipo: 'cert',
+    titulo: 'NSE 1 · Ciberseguridad',
+    url: 'https://www.credly.com/badges/b0ac16d1-2434-4a5d-b5b4-0a92a8b0d08b/public_url',
+    subtitulo: { es: 'Fortinet', en: 'Fortinet' },
+    detalle: {
+      es: ['Certificación en fundamentos de ciberseguridad y la nube.'],
+      en: ['Certification in cybersecurity fundamentals and the cloud.']
     }
   },
   {

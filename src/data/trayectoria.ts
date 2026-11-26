@@ -33,8 +33,8 @@ export const TRAYECTORIA: ItemTrayectoria[] = [
       en: 'Systems Engineering · expected graduation'
     },
     detalle: {
-      es: ['Formación en ingeniería de software, bases de datos, redes y algoritmos.'],
-      en: ['Training in software engineering, databases, networks and algorithms.']
+      es: ['Formación en ingeniería de sistemas, IA (Deep Learning y Machine Learning), desarrollo web, bases de datos, arquitectura de software, seguridad informática y redes.'],
+      en: ['Training in systems engineering, AI (deep learning and machine learning), web development, databases, software architecture, cybersecurity, and networking.']
     }
   },
   {

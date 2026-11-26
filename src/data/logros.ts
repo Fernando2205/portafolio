@@ -2,6 +2,13 @@ import { igual, type Localizado } from '../i18n/tipos'
 
 export type TipoLogro = 'win' | 'hack' | 'paper'
 
+/** Una etapa del recorrido de la tarjeta destacada (regional → nacional). */
+export interface EtapaRecorrido {
+  puesto: number
+  etapa: Localizado
+  titulo: string
+}
+
 export interface Logro {
   anio: string
   tipo: TipoLogro
@@ -14,32 +21,40 @@ export interface Logro {
   repo?: string
   /** Slug del proyecto que abre la tarjeta al hacer clic. */
   proyecto?: string
+  /** Etapas que se dibujan en la tarjeta destacada, en orden. */
+  recorrido?: EtapaRecorrido[]
+  /** Logro que ocupa la tarjeta grande de la sección. Solo uno. */
+  destacado?: boolean
 }
 
 export const LOGROS: Logro[] = [
   {
     anio: '2026',
-    tipo: 'win',
-    titulo: 'UrbaNet',
-    evento: igual('Hackathon Colombia 5.0 · Regional Valle del Cauca'),
-    resultado: { es: 'Ganador', en: 'Winner' },
-    repo: 'https://github.com/Johan-Santacruz/Colombia5.0',
-    // pendiente: descripción real de UrbaNet
-    descripcion: {
-      es: 'Proyecto ganador de la etapa regional del Valle del Cauca, que dio el paso a la final nacional.',
-      en: 'Winning project of the Valle del Cauca regional stage, which led to the national final.'
-    }
-  },
-  {
-    anio: '2026',
     tipo: 'hack',
     titulo: 'OCULUS',
-    evento: igual('Hackathon Colombia 5.0 · Nacional'),
+    evento: {
+      es: 'Hackathon Colombia 5.0 · MinTIC · Nacional',
+      en: 'Hackathon Colombia 5.0 · MinTIC · National'
+    },
     resultado: { es: '2.º lugar', en: '2nd place' },
+    destacado: true,
+    recorrido: [
+      {
+        puesto: 1,
+        etapa: { es: 'Regional Valle del Cauca', en: 'Valle del Cauca regional' },
+        titulo: 'UrbaNet'
+      },
+      {
+        puesto: 2,
+        etapa: { es: 'Final nacional', en: 'National final' },
+        titulo: 'OCULUS'
+      }
+    ],
     proyecto: 'oculus',
+    repo: 'https://github.com/Johan-Santacruz/BogotaHackColombia5.0',
     descripcion: {
-      es: 'Auditoría de contratos públicos con IA. Segundo lugar en la final nacional.',
-      en: 'AI auditing of public contracts. Second place in the national final.'
+      es: 'Auditoría de contratos públicos de Colombia con IA: puntajes de riesgo de corrupción sobre SECOP. Segundo lugar en la final nacional de la hackathon organizada por el MinTIC.',
+      en: 'AI auditing of Colombian public contracts: corruption risk scores on SECOP data. Second place in the national final of the hackathon organized by MinTIC.'
     }
   },
   {
@@ -67,7 +82,7 @@ export const LOGROS: Logro[] = [
   }
 ]
 
-/** El logro destacado de la sección: la victoria regional. */
-export const LOGRO_DESTACADO = LOGROS.find(l => l.tipo === 'win')
+/** El logro de la tarjeta grande: el marcado como `destacado`. */
+export const LOGRO_DESTACADO = LOGROS.find(l => l.destacado)
 
-export const LOGROS_SECUNDARIOS = LOGROS.filter(l => l.tipo !== 'win')
+export const LOGROS_SECUNDARIOS = LOGROS.filter(l => !l.destacado)

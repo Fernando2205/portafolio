@@ -93,7 +93,8 @@ export const en: Diccionario = {
   logros: {
     etiqueta: '03 / achievements',
     titulo: 'Hackathons and research.',
-    codigo: 'code'
+    codigo: 'code',
+    verProyecto: 'view project'
   },
 
   proyectos: {

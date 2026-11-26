@@ -3,23 +3,33 @@ import { gsap } from './gsap'
 import { reducido } from './loop'
 
 /**
- * Sección de logros: el `#1` del destacado entra con elastic.out y las
- * tarjetas de OCULUS y CLARA abren su proyecto.
+ * Sección de logros: el recorrido del destacado (regional → nacional) se
+ * dibuja de izquierda a derecha, cada puesto entra con elastic.out, y todo lo
+ * que lleva `data-ir-proyecto` abre su proyecto.
  */
 export function iniciarLogros () {
   const bajas: Array<() => void> = []
 
-  const numero = document.querySelector<HTMLElement>('[data-logro-numero]')
-  if (numero && !reducido) {
+  const recorrido = document.querySelector<HTMLElement>('[data-recorrido]')
+  if (recorrido && !reducido) {
     const contexto = gsap.context(() => {
-      gsap.from(numero, {
-        scale: 0.4,
-        rotation: -12,
-        opacity: 0,
-        transformOrigin: '0% 100%',
-        duration: 1.4,
-        ease: 'elastic.out(1,.6)',
-        scrollTrigger: { trigger: numero, start: 'top 85%' }
+      const linea = recorrido.querySelector('[data-recorrido-linea]')
+      const puntos = recorrido.querySelectorAll('[data-recorrido-punto]')
+      const numeros = recorrido.querySelectorAll('[data-recorrido-num]')
+      // Cada número entra cuando la línea llega a su punto.
+      const paso = 0.7
+      const tl = gsap.timeline({ scrollTrigger: { trigger: recorrido, start: 'top 85%' } })
+      tl.from(linea, { scaleX: 0, duration: paso * (puntos.length - 1), ease: 'power2.inOut' }, 0)
+      puntos.forEach((punto, i) => {
+        tl.from(punto, { scale: 0, duration: 0.4, ease: 'back.out(3)' }, i * paso)
+        tl.from(numeros[i], {
+          scale: 0.4,
+          rotation: -12,
+          opacity: 0,
+          transformOrigin: '0% 100%',
+          duration: 1.4,
+          ease: 'elastic.out(1,.6)'
+        }, i * paso + 0.1)
       })
     })
     bajas.push(() => contexto.revert())

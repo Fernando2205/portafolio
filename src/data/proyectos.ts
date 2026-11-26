@@ -39,8 +39,8 @@ export const PROYECTOS: Proyecto[] = [
     nombre: 'OCULUS',
     anio: '2026',
     distintivo: {
-      es: '2.º lugar · Hackathon Colombia 5.0 Nacional',
-      en: '2nd place · Hackathon Colombia 5.0 National'
+      es: '2.º lugar · Hackathon Colombia 5.0 (MinTIC) Nacional',
+      en: '2nd place · Hackathon Colombia 5.0 (MinTIC) National'
     },
     tipo: { es: 'Plataforma full stack + IA', en: 'Full stack platform + AI' },
     tinte: 'oklch(0.42 0.07 55)',

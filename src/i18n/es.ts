@@ -95,7 +95,8 @@ export const es = {
   logros: {
     etiqueta: '03 / logros',
     titulo: 'Hackatones e investigación.',
-    codigo: 'código'
+    codigo: 'código',
+    verProyecto: 'ver proyecto'
   },
 
   proyectos: {

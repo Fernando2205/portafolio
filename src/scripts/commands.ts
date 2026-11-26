@@ -269,11 +269,13 @@ export function crearInterprete (consola: Consola) {
       case 'hackatones':
       case 'hackathons':
         salida = LOGROS
-          .filter(l => (c.startsWith('hack') ? l.tipo !== 'paper' : true))
-          .map(l => {
-            const marca = l.tipo === 'win' ? '★' : '·'
+          .filter(l => (c.startsWith('hack') ? l.tipo === 'win' || l.tipo === 'hack' : true))
+          .flatMap(l => {
+            const marca = l.destacado ? '★' : '·'
             const texto = `  ${marca} ${l.anio}  ${l.resultado[lang].padEnd(12)} ${l.titulo} — ${l.evento[lang]}`
-            return l.tipo === 'win' ? a(texto) : o(texto)
+            const etapas = (l.recorrido ?? []).map(e =>
+              o(`          ↳ #${e.puesto} ${e.etapa[lang].padEnd(26)} ${e.titulo}`))
+            return [l.destacado ? a(texto) : o(texto), ...etapas]
           })
         window.setTimeout(() => irA('logros'), 300)
         break

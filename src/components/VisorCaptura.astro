@@ -1,0 +1,110 @@
+---
+import { getLang, t } from '../i18n/utils'
+
+const dic = t(getLang(Astro.url))
+
+/*
+  Visor de capturas de proyecto. Es un <dialog> nativo, como el del CV: el
+  foco atrapado, Escape y el fondo los da el navegador.
+
+  La imagen se rellena desde gallery.ts al abrirlo, con la versión grande que
+  la fila de proyecto lleva en `data-galeria`; así no se descarga hasta que
+  alguien la pide.
+*/
+---
+
+<dialog
+  data-visor-captura
+  aria-label={dic.proyectos.visor}
+  tabindex="-1"
+  class="m-0 outline-none h-dvh max-h-none w-screen max-w-none flex-col bg-transparent p-0 text-fg backdrop:bg-black/85"
+>
+  <div class="flex shrink-0 items-center gap-4 px-[clamp(16px,3vw,32px)] py-4 font-mono text-xs">
+    <span data-visor-titulo class="text-[#efe7dc]"></span>
+    <span data-visor-contador class="text-[#efe7dc]/60"></span>
+    <button
+      type="button"
+      data-visor-cerrar
+      aria-label={dic.proyectos.cerrarVisor}
+      class="ml-auto cursor-pointer rounded-full border border-white/20 bg-black/40 px-3 py-1.5 text-[#efe7dc] hover:border-acc hover:text-acct"
+    >
+      {`${dic.cursor.cerrar} ✕`}
+    </button>
+  </div>
+
+  <div data-visor-escenario class="relative flex min-h-0 flex-1 items-center justify-center px-[clamp(12px,6vw,96px)] pb-[clamp(12px,4vh,40px)]">
+    <img
+      data-visor-imagen
+      alt=""
+      decoding="async"
+      class="max-h-full max-w-full rounded-preview object-contain shadow-terminal"
+    />
+
+    <button
+      type="button"
+      data-visor-anterior
+      aria-label={dic.proyectos.anterior}
+      class="absolute top-1/2 left-[clamp(8px,2vw,24px)] grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-white/20 bg-black/50 font-mono text-lg text-[#efe7dc] hover:border-acc hover:text-acct"
+    >
+      ←
+    </button>
+    <button
+      type="button"
+      data-visor-siguiente
+      aria-label={dic.proyectos.siguiente}
+      class="absolute top-1/2 right-[clamp(8px,2vw,24px)] grid size-11 -translate-y-1/2 cursor-pointer place-items-center rounded-full border border-white/20 bg-black/50 font-mono text-lg text-[#efe7dc] hover:border-acc hover:text-acct"
+    >
+      →
+    </button>
+  </div>
+</dialog>
+
+<style>
+  /* Igual que en el visor del CV: `flex` pisa el display:none del navegador. */
+  dialog[data-visor-captura]:not([open]) {
+    display: none;
+  }
+
+  dialog[data-visor-captura][open] {
+    display: flex;
+  }
+
+  dialog[data-visor-captura] {
+    opacity: 0;
+    transition:
+      opacity .25s ease,
+      overlay .25s ease allow-discrete,
+      display .25s ease allow-discrete;
+  }
+
+  dialog[data-visor-captura][open] {
+    opacity: 1;
+  }
+
+  @starting-style {
+    dialog[data-visor-captura][open] {
+      opacity: 0;
+    }
+  }
+
+  dialog[data-visor-captura]::backdrop {
+    backdrop-filter: blur(6px);
+  }
+
+  [data-visor-imagen] {
+    transition: opacity .2s ease, transform .25s ease;
+  }
+
+  [data-visor-imagen][data-cargando] {
+    opacity: 0;
+    transform: scale(.985);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    dialog[data-visor-captura],
+    [data-visor-imagen] {
+      transition: none;
+      transform: none;
+    }
+  }
+</style>

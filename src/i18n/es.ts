@@ -104,7 +104,12 @@ export const es = {
     pista: 'pasa el cursor · clic para abrir',
     captura: 'captura',
     verProyecto: 'ver proyecto',
-    codigo: 'código'
+    codigo: 'código',
+    ampliar: 'ampliar captura',
+    visor: 'Capturas del proyecto',
+    cerrarVisor: 'Cerrar el visor',
+    anterior: 'Captura anterior',
+    siguiente: 'Captura siguiente'
   },
 
   terminal: {
@@ -159,6 +164,7 @@ export const es = {
     copiar: 'copiar',
     escribe: 'escribe',
     ver: 'ver',
+    ampliar: 'ampliar',
     baja: 'baja',
     tema: 'tema',
     idioma: 'idioma'

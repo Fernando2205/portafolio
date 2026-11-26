@@ -102,7 +102,12 @@ export const en: Diccionario = {
     pista: 'hover · click to open',
     captura: 'screenshot',
     verProyecto: 'view project',
-    codigo: 'code'
+    codigo: 'code',
+    ampliar: 'enlarge screenshot',
+    visor: 'Project screenshots',
+    cerrarVisor: 'Close the viewer',
+    anterior: 'Previous screenshot',
+    siguiente: 'Next screenshot'
   },
 
   terminal: {
@@ -156,6 +161,7 @@ export const en: Diccionario = {
     copiar: 'copy',
     escribe: 'type',
     ver: 'view',
+    ampliar: 'zoom',
     baja: 'scroll',
     tema: 'theme',
     idioma: 'lang'

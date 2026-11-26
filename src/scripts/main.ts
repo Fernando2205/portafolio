@@ -7,6 +7,7 @@ import { iniciarContacto } from './contact'
 import { iniciarCursor } from './cursor'
 import { iniciarVisorCv } from './cv'
 import { iniciarHuevos } from './eggs'
+import { iniciarGaleria } from './gallery'
 import { iniciarHero } from './hero'
 import { iniciarTrayectoria } from './journey'
 import { iniciarLoader } from './loader'
@@ -46,6 +47,7 @@ const modulos = [
   iniciarTrayectoria,
   iniciarLogros,
   iniciarProyectos,
+  iniciarGaleria,
   iniciarFisica,
   iniciarContacto,
   iniciarVisorCv,

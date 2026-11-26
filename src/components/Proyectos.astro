@@ -1,12 +1,34 @@
 ---
-import { Image } from 'astro:assets'
+import { Image, getImage } from 'astro:assets'
 import { capturasDe } from '../data/imagenes'
 import { PROYECTOS } from '../data/proyectos'
 import { getLang, t } from '../i18n/utils'
 import PreviewProyecto from './PreviewProyecto.astro'
+import VisorCaptura from './VisorCaptura.astro'
 
 const lang = getLang(Astro.url)
 const dic = t(lang)
+
+/*
+  Versión grande de cada captura para el visor (gallery.ts). Se genera aquí, en
+  el build, y viaja en `data-galeria` de la fila; el navegador solo la pide al
+  abrir el visor.
+*/
+const ANCHO_VISOR = 2400
+const galerias = Object.fromEntries(
+  await Promise.all(
+    PROYECTOS.map(async proyecto => {
+      const grandes = await Promise.all(
+        capturasDe(proyecto.slug).map(async captura => {
+          const ancho = Math.min(captura.width, ANCHO_VISOR)
+          const imagen = await getImage({ src: captura, width: ancho, format: 'webp' })
+          return { src: imagen.src, ancho, alto: Math.round(ancho * captura.height / captura.width) }
+        })
+      )
+      return [proyecto.slug, grandes] as const
+    })
+  )
+)
 
 const RAYAS =
   'repeating-linear-gradient(135deg,rgba(255,255,255,.07) 0 1px,transparent 1px 11px)'
@@ -49,6 +71,8 @@ const RAYAS =
           <div
             data-row
             data-slug={proyecto.slug}
+            data-nombre={proyecto.nombre}
+            data-galeria={capturas.length > 0 ? JSON.stringify(galerias[proyecto.slug]) : undefined}
             class="cursor-pointer border-b border-line"
             style="padding:clamp(20px,3vw,32px) 0"
           >
@@ -94,16 +118,24 @@ const RAYAS =
                 ? (
                     <div class="flex h-[min(620px,70vh)] w-full items-end justify-center">
                       {capturas.slice(0, 2).map((imagen, orden) => (
-                        <Image
-                          src={imagen}
-                          alt={`${dic.proyectos.captura} · ${proyecto.nombre}`}
-                          widths={[320, 640]}
-                          sizes="320px"
+                        <button
+                          type="button"
+                          data-ampliar={orden}
+                          aria-label={`${dic.proyectos.ampliar} · ${proyecto.nombre} ${orden + 1}`}
+                          data-cursor={dic.cursor.ampliar}
                           class:list={[
-                            'w-auto rounded-preview border border-line object-cover shadow-toast',
+                            'cursor-zoom-in border-0 bg-transparent p-0 transition-transform duration-300 ease-suave hover:scale-[1.02]',
                             orden === 0 ? 'h-[88%] -rotate-3' : 'z-10 -ml-14 h-full rotate-2'
                           ]}
-                        />
+                        >
+                          <Image
+                            src={imagen}
+                            alt={`${dic.proyectos.captura} · ${proyecto.nombre}`}
+                            widths={[320, 640]}
+                            sizes="320px"
+                            class="h-full w-auto rounded-preview border border-line object-cover shadow-toast"
+                          />
+                        </button>
                       ))}
                     </div>
                   )
@@ -117,13 +149,26 @@ const RAYAS =
                     >
                       {captura
                         ? (
-                            <Image
-                              src={captura}
-                              alt={`${dic.proyectos.captura} · ${proyecto.nombre}`}
-                              widths={[480, 960]}
-                              sizes="(max-width: 640px) 100vw, 480px"
-                              class="h-full w-full object-cover"
-                            />
+                            <button
+                              type="button"
+                              data-ampliar="0"
+                              aria-label={`${dic.proyectos.ampliar} · ${proyecto.nombre}`}
+                              data-cursor={dic.cursor.ampliar}
+                              class="group block h-full w-full cursor-zoom-in border-0 bg-transparent p-0"
+                            >
+                              <Image
+                                src={captura}
+                                alt={`${dic.proyectos.captura} · ${proyecto.nombre}`}
+                                widths={[480, 960]}
+                                sizes="(max-width: 640px) 100vw, 480px"
+                                class="h-full w-full object-cover transition-transform duration-500 ease-suave group-hover:scale-[1.03]"
+                              />
+                              {capturas.length > 1 && (
+                                <span class="absolute right-3 bottom-3 rounded-full bg-black/60 px-2.5 py-1 font-mono text-[11px] text-[#efe7dc]">
+                                  {`+${capturas.length - 1}`}
+                                </span>
+                              )}
+                            </button>
                           )
                         : (
                             <>
@@ -196,6 +241,7 @@ const RAYAS =
 </section>
 
 <PreviewProyecto />
+<VisorCaptura />
 
 <noscript>
   <style>

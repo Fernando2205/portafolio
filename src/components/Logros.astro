@@ -113,14 +113,19 @@ const recorrido = LOGRO_DESTACADO?.recorrido ?? []
   >
     {
       LOGROS_SECUNDARIOS.map(logro => {
-        const Etiqueta = logro.proyecto ? 'button' : 'div'
+        const enlace = !logro.proyecto && logro.url ? logro.url : undefined
+        const Etiqueta = logro.proyecto ? 'button' : enlace ? 'a' : 'div'
+        const clicable = Boolean(logro.proyecto || enlace)
         return (
           <Etiqueta
             data-ach
             type={logro.proyecto ? 'button' : undefined}
+            href={enlace}
+            target={enlace ? '_blank' : undefined}
+            rel={enlace ? 'noreferrer' : undefined}
             data-ir-proyecto={logro.proyecto}
-            data-cursor={logro.proyecto ? dic.cursor.ver : undefined}
-            class={`flex flex-col gap-3 rounded-tarjeta border border-line bg-card p-6 text-left transition-[border-color,transform] duration-300 ease-suave hover:border-acc hover:-translate-y-1 ${logro.proyecto ? 'cursor-pointer' : ''}`}
+            data-cursor={clicable ? dic.cursor.ver : undefined}
+            class={`flex flex-col gap-3 rounded-tarjeta border border-line bg-card p-6 text-left transition-[border-color,transform] duration-300 ease-suave hover:border-acc hover:-translate-y-1 ${clicable ? 'cursor-pointer' : ''}`}
           >
             <div class="flex justify-between gap-3 font-mono text-xs">
               <span class="text-acct">{logro.resultado[lang]}</span>

@@ -19,6 +19,8 @@ export interface Logro {
   resultado: Localizado
   descripcion: Localizado
   repo?: string
+  /** Enlace externo de la tarjeta (p. ej. la publicación). */
+  url?: string
   /** Slug del proyecto que abre la tarjeta al hacer clic. */
   proyecto?: string
   /** Etapas que se dibujan en la tarjeta destacada, en orden. */
@@ -90,6 +92,7 @@ export const LOGROS: Logro[] = [
       en: 'VIII International Congress AmITIC'
     },
     resultado: { es: 'Publicación', en: 'Publication' },
+    url: 'https://ieeexplore.ieee.org/document/11214607',
     descripcion: igual('“Evaluating Memoized Dynamic Programming and Greedy Best-First Search for Simulation-to-Real Mobile Robot Path Planning”.')
   }
 ]

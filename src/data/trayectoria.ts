@@ -81,6 +81,17 @@ export const TRAYECTORIA: ItemTrayectoria[] = [
     }
   },
   {
+    anio: '2026',
+    tipo: 'cert',
+    titulo: 'Cracking into Hack The Box',
+    url: 'https://academy.hackthebox.com/achievement/badge/66315089-a59b-11f1-82d1-bea50ffe6cb4',
+    subtitulo: { es: 'Hack The Box', en: 'Hack The Box' },
+    detalle: {
+      es: ['Certificación en fundamentos de ciberseguridad y hacking ético.'],
+      en: ['Certification in cybersecurity fundamentals and ethical hacking.']
+    }
+  },
+  {
     anio: '2025',
     tipo: 'cert',
     titulo: 'Full Stack Empresarial con Spring Boot y Angular',

@@ -1,6 +1,6 @@
 import { igual, type Localizado } from '../i18n/tipos'
 
-export type TipoLogro = 'win' | 'hack' | 'paper'
+export type TipoLogro = 'win' | 'hack' | 'paper' | 'talk'
 
 /** Una etapa del recorrido de la tarjeta destacada (regional → nacional). */
 export interface EtapaRecorrido {
@@ -68,6 +68,18 @@ export const LOGROS: Logro[] = [
       es: 'PWA de inventarios por voz con reconocimiento facial, construida para el reto de Colsubsidio.',
       en: 'Voice inventory PWA with facial recognition, built for the Colsubsidio challenge.'
     }
+  },
+  {
+    anio: '2026',
+    tipo: 'talk',
+    titulo: 'EISI 2026',
+    evento: {
+      es: 'V Encuentro Interinstitucional de Semilleros de Investigación',
+      en: '5th Inter-institutional Meeting of Research Seedbeds'
+    },
+    resultado: { es: 'Ponencia', en: 'Talk' },
+    proyecto: 'samcore',
+    descripcion: igual('“Sistema inteligente para la detección de anomalías en productos basada en segmentación automática con modelos fundacionales de visión artificial”.')
   },
   {
     anio: '2025',

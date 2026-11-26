@@ -72,12 +72,12 @@ export const es = {
 
   sobre: {
     etiqueta: '01 / sobre mí',
-    parrafo: 'Estudio Ingeniería de Sistemas en la Universidad de San Buenaventura Cali y trabajo como desarrollador. Construyo aplicaciones full stack, automatizo flujos de trabajo con n8n y creo agentes de IA que leen, clasifican y extraen información de documentos. Me interesa especialmente la web3 y la tecnología que hace las cosas más transparentes.',
+    parrafo: 'Estudio Ingeniería de Sistemas en la Universidad de San Buenaventura Cali y trabajo como desarrollador. Además del desarrollo web, automatizo procesos con n8n y estoy muy metido en la inteligencia artificial: desde construir agentes hasta diseñar arquitecturas, entrenar redes neuronales y llevarlas a producción. Me interesa la web3 y la tecnología que hace las cosas más transparentes.',
     fotoAlt: 'Retrato de Delio Fernando Palacios',
     fotoPendiente: 'Tu foto aquí',
     datos: {
-      construyendo: { clave: 'construyendo', valor: 'Agentes de IA documentales' },
-      explorando: { clave: 'explorando', valor: 'Web3' },
+      construyendo: { clave: 'construyendo', valor: 'Agentes de IA y automatizaciones' },
+      explorando: { clave: 'explorando', valor: 'Visión artificial y web3' },
       idiomas: { clave: 'idiomas', valor: 'Español · Inglés B2' }
     },
     comoTrabajo: 'cómo trabajo',

@@ -70,12 +70,12 @@ export const en: Diccionario = {
 
   sobre: {
     etiqueta: '01 / about',
-    parrafo: 'I study Systems Engineering at Universidad de San Buenaventura Cali and work as a developer. I build full stack applications, automate workflows with n8n and create AI agents that read, classify and extract information from documents. I am especially drawn to web3 and to technology that makes things more transparent.',
+    parrafo: 'I study Systems Engineering at Universidad de San Buenaventura Cali and work as a developer. Beyond web development, I automate processes with n8n and I am deeply into artificial intelligence: from building agents to designing architectures, training neural networks and taking them to production. I am interested in web3 and in technology that makes things more transparent.',
     fotoAlt: 'Portrait of Delio Fernando Palacios',
     fotoPendiente: 'Your photo here',
     datos: {
-      construyendo: { clave: 'building', valor: 'AI agents for documents' },
-      explorando: { clave: 'exploring', valor: 'Web3' },
+      construyendo: { clave: 'building', valor: 'AI agents and automations' },
+      explorando: { clave: 'exploring', valor: 'Computer vision and web3' },
       idiomas: { clave: 'languages', valor: 'Spanish · English B2' }
     },
     comoTrabajo: 'how I work',

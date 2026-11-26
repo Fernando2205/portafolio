@@ -67,7 +67,7 @@ export const es = {
 
   cinta: {
     fila1: ['Full stack', 'Automatización', 'Agentes de IA', 'Web3'],
-    fila2: ['Python', 'React', 'FastAPI', 'n8n', 'Cali, CO']
+    fila2: ['FastAPI', 'React', 'Springboot', 'n8n', 'Flutter']
   },
 
   sobre: {

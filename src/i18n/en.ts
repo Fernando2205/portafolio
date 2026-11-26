@@ -64,8 +64,8 @@ export const en: Diccionario = {
   },
 
   cinta: {
-    fila1: ['Full stack', 'Automation', 'AI agents', 'Web3'],
-    fila2: ['Python', 'React', 'FastAPI', 'n8n', 'Cali, CO']
+    fila1: ['Full stack', 'Automation', 'AI Agents', 'Web3'],
+    fila2: ['FastAPI', 'React', 'Springboot', 'n8n', 'Flutter']
   },
 
   sobre: {

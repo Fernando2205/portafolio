@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets'
-import { capturaDe } from '../data/imagenes'
+import { capturasDe } from '../data/imagenes'
 import { PROYECTOS } from '../data/proyectos'
 import { getLang, t } from '../i18n/utils'
 import PreviewProyecto from './PreviewProyecto.astro'
@@ -26,8 +26,25 @@ const RAYAS =
   <div data-lista-proyectos class="border-t border-line">
     {
       PROYECTOS.map((proyecto, i) => {
-        const captura = capturaDe(proyecto.slug)
+        const capturas = capturasDe(proyecto.slug)
+        const captura = capturas[0]
         const idPanel = `proyecto-panel-${proyecto.slug}`
+
+        /*
+          La caja toma la proporción de la captura, así que se ve entera y sin
+          recortes, sea cual sea.
+
+          Las verticales (capturas de móvil) se tratan aparte: a lo ancho de la
+          columna una proporción de 0.47 daría más de 1000px de alto. En vez de
+          estirar la caja, se le fija el alto y el ancho sale de la proporción,
+          con lo que queda centrada y del tamaño de un teléfono.
+        */
+        const proporcion = captura ? captura.width / captura.height : 16 / 10
+        const vertical = proporcion < 1
+        /* Con dos capturas verticales se montan en collage, que llena el ancho
+           que una sola captura de móvil deja vacío. */
+        const collage = vertical && capturas.length > 1
+
         return (
           <div
             data-row
@@ -73,32 +90,54 @@ const RAYAS =
               class="grid gap-8"
               style="grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr));padding:32px 0 8px clamp(0px,4vw,56px)"
             >
-              <div
-                class="relative aspect-[16/10] overflow-hidden rounded-preview"
-                style={`background:${proyecto.tinte}`}
-              >
-                {captura
-                  ? (
-                      <Image
-                        src={captura}
-                        alt={`${dic.proyectos.captura} · ${proyecto.nombre}`}
-                        widths={[480, 960]}
-                        sizes="(max-width: 640px) 100vw, 480px"
-                        class="h-full w-full object-cover"
-                      />
-                    )
-                  : (
-                      <>
-                        <div class="absolute inset-0" style={`background:${RAYAS}`}></div>
-                        <div
-                          class="absolute bottom-3.5 left-4 font-mono text-xs"
-                          style="color:#efe7dc"
-                        >
-                          {`${dic.proyectos.captura} · ${proyecto.nombre}`}
-                        </div>
-                      </>
-                    )}
-              </div>
+              {collage
+                ? (
+                    <div class="flex h-[min(620px,70vh)] w-full items-end justify-center">
+                      {capturas.slice(0, 2).map((imagen, orden) => (
+                        <Image
+                          src={imagen}
+                          alt={`${dic.proyectos.captura} · ${proyecto.nombre}`}
+                          widths={[320, 640]}
+                          sizes="320px"
+                          class:list={[
+                            'w-auto rounded-preview border border-line object-cover shadow-toast',
+                            orden === 0 ? 'h-[88%] -rotate-3' : 'z-10 -ml-14 h-full rotate-2'
+                          ]}
+                        />
+                      ))}
+                    </div>
+                  )
+                : (
+                    <div
+                      class:list={[
+                        'relative overflow-hidden rounded-preview',
+                        vertical ? 'mx-auto h-[min(760px,76vh)] w-auto' : 'w-full'
+                      ]}
+                      style={`aspect-ratio:${proporcion};background:${proyecto.tinte}`}
+                    >
+                      {captura
+                        ? (
+                            <Image
+                              src={captura}
+                              alt={`${dic.proyectos.captura} · ${proyecto.nombre}`}
+                              widths={[480, 960]}
+                              sizes="(max-width: 640px) 100vw, 480px"
+                              class="h-full w-full object-cover"
+                            />
+                          )
+                        : (
+                            <>
+                              <div class="absolute inset-0" style={`background:${RAYAS}`}></div>
+                              <div
+                                class="absolute bottom-3.5 left-4 font-mono text-xs"
+                                style="color:#efe7dc"
+                              >
+                                {`${dic.proyectos.captura} · ${proyecto.nombre}`}
+                              </div>
+                            </>
+                          )}
+                    </div>
+                  )}
 
               <div class="flex flex-col gap-5">
                 {proyecto.distintivo && (

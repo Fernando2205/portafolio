@@ -51,6 +51,18 @@ export function iniciarProyectos () {
     preview.style.opacity = visible ? '1' : '0'
   }
 
+  /*
+    La captura del panel es `loading="lazy"` y el panel arranca oculto, así que
+    el navegador no la pide hasta que se abre: al animar, la altura medida se
+    queda corta y el panel pega un salto al final. Pasándola a `eager` en
+    cuanto el cursor entra en la fila, llega cargada al clic.
+  */
+  function precargarCaptura (fila: HTMLElement) {
+    for (const img of fila.querySelectorAll('[data-panel] img')) {
+      if (img instanceof HTMLImageElement && img.loading === 'lazy') img.loading = 'eager'
+    }
+  }
+
   const alEntrar = (e: Event) => {
     const fila = e.currentTarget
     if (!(fila instanceof HTMLElement)) return
@@ -59,6 +71,13 @@ export function iniciarProyectos () {
     if (anterior) pintarNombre(anterior)
     pintarNombre(fila)
     pintarPreview()
+    precargarCaptura(fila)
+  }
+
+  // Quien navega con el teclado nunca pasa el cursor: el foco hace lo mismo.
+  const alEnfocar = (e: Event) => {
+    const fila = e.currentTarget
+    if (fila instanceof HTMLElement) precargarCaptura(fila)
   }
 
   const alSalirLista = () => {
@@ -117,9 +136,11 @@ export function iniciarProyectos () {
 
   for (const fila of filas) {
     fila.addEventListener('mouseenter', alEntrar)
+    fila.addEventListener('focusin', alEnfocar)
     fila.addEventListener('click', alClicFila)
     bajas.push(() => {
       fila.removeEventListener('mouseenter', alEntrar)
+      fila.removeEventListener('focusin', alEnfocar)
       fila.removeEventListener('click', alClicFila)
     })
 

@@ -28,6 +28,20 @@ export function capturaDe (slug: string): ImageMetadata | undefined {
   return CAPTURAS[slug]
 }
 
+/**
+ * Todas las capturas de un proyecto, en orden: la principal (`<slug>`) y las
+ * que se le añadan después (`<slug>-2`, `<slug>-3`…).
+ *
+ * Con dos o más, un proyecto de móvil las monta en collage en vez de dejar una
+ * sola captura estrecha con mucho aire al lado.
+ */
+export function capturasDe (slug: string): ImageMetadata[] {
+  return Object.keys(CAPTURAS)
+    .filter(nombre => nombre === slug || nombre.startsWith(`${slug}-`))
+    .sort()
+    .map(nombre => CAPTURAS[nombre])
+}
+
 const fotos = import.meta.glob<Modulo>(
   '../assets/foto.{png,jpg,jpeg,webp,avif}',
   { eager: true }

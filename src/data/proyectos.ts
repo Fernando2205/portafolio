@@ -45,6 +45,7 @@ export const PROYECTOS: Proyecto[] = [
     tipo: { es: 'Plataforma full stack + IA', en: 'Full stack platform + AI' },
     tinte: 'oklch(0.42 0.07 55)',
     url: '', // pendiente: demo de OCULUS
+    repo: 'https://github.com/Johan-Santacruz/BogotaHackColombia5.0',
     descripcion: {
       es: 'Auditoría de contratos públicos de Colombia. Consume la API de SECOP y evalúa cada contrato con IA para asignar un puntaje de riesgo de corrupción. Incluye panel de alertas, mapa por regiones, infografías, reportes en PDF y consultas por voz y texto desde un bot de Telegram.',
       en: 'Audits Colombian public contracts. It consumes the SECOP API and scores each contract for corruption risk with AI. Includes an alerts dashboard, regional map, infographics, PDF reports, and voice and text queries through a Telegram bot.'
@@ -54,10 +55,11 @@ export const PROYECTOS: Proyecto[] = [
   {
     slug: 'clara',
     nombre: 'CLARA',
-    anio: '2025',
+    anio: '2026',
     tipo: { es: 'PWA de inventarios por voz', en: 'Voice inventory PWA' },
     tinte: 'oklch(0.42 0.07 150)',
-    url: '', // pendiente: demo de CLARA
+    url: '',
+    repo: 'https://github.com/Fernando2205/CLARA',
     descripcion: {
       es: 'Aplicación web progresiva para Colsubsidio que captura inventarios por voz: autenticación por reconocimiento facial, registro conversacional asistido por IA, validación en tiempo real contra el catálogo y actas firmadas digitalmente con exportación a PDF y Excel.',
       en: 'Progressive web app for Colsubsidio that captures inventory by voice: facial recognition login, AI-assisted conversational entry, real-time catalog validation and digitally signed records exported to PDF and Excel.'
@@ -65,25 +67,26 @@ export const PROYECTOS: Proyecto[] = [
     etiquetas: ['React', 'FastAPI', 'OpenAI', 'face-api.js']
   },
   {
-    slug: 'codemaster',
-    nombre: 'CodeMaster',
-    anio: '2024',
-    tipo: { es: 'Juez de código online', en: 'Online code judge' },
-    tinte: 'oklch(0.42 0.07 250)',
-    url: '', // pendiente: demo de CodeMaster
+    slug: 'peliculas-app',
+    nombre: 'Películas App',
+    anio: '2026',
+    tipo: { es: 'App móvil', en: 'Mobile app' },
+    tinte: 'oklch(0.42 0.07 200)',
+    url: '',
+    repo: 'https://github.com/Fernando2205/peliculas-app-flutter',
     descripcion: {
-      es: 'Plataforma tipo LeetCode: registro de usuarios, envío de soluciones y evaluación automática en Python, Java y Ruby contra casos de prueba, con historial de soluciones.',
-      en: 'LeetCode-style platform: user accounts, solution submissions and automatic grading in Python, Java and Ruby against test cases, with a solution history.'
+      es: 'App en Flutter para descubrir películas y series con datos de TMDB: autenticación segura, códigos QR geolocalizados en mapa, historial de escaneos y notificaciones push con Firebase.',
+      en: 'Flutter app to discover movies and shows with TMDB data: secure auth, geolocated QR codes on a map, scan history and push notifications with Firebase.'
     },
-    etiquetas: ['Python', 'Flask', 'PostgreSQL']
+    etiquetas: ['Flutter', 'Dart', 'Firebase', 'TMDB']
   },
   {
     slug: 'pokecards-3d',
     nombre: 'PokeCards 3D',
-    anio: '2024',
+    anio: '2025',
     tipo: { es: 'Pokédex en 3D', en: '3D Pokédex' },
     tinte: 'oklch(0.42 0.07 330)',
-    url: 'https://pokecards-sigma.vercel.app/', // pendiente: demo de PokeCards 3D
+    url: 'https://pokecards-sigma.vercel.app/',
     descripcion: {
       es: 'Pokédex web que renderiza cartas de Pokémon en 3D real con React Three Fiber, con lista, panel de detalles y datos en tiempo real desde PokeAPI.',
       en: 'Web Pokédex that renders Pokémon cards in real 3D with React Three Fiber, with a list, detail panel and live data from PokeAPI.'
@@ -91,17 +94,18 @@ export const PROYECTOS: Proyecto[] = [
     etiquetas: ['React', 'Three.js', 'R3F', 'PokeAPI']
   },
   {
-    slug: 'peliculas-app',
-    nombre: 'Películas App',
+    slug: 'codemaster',
+    nombre: 'CodeMaster',
     anio: '2024',
-    tipo: { es: 'App móvil', en: 'Mobile app' },
-    tinte: 'oklch(0.42 0.07 200)',
-    url: 'https://github.com/Fernando2205/peliculas-app-flutter', // pendiente: demo de Películas App
+    tipo: { es: 'Juez de código online', en: 'Online code judge' },
+    tinte: 'oklch(0.42 0.07 250)',
+    url: '',
+    repo: 'https://github.com/Fernando2205/leetcode-clone',
     descripcion: {
-      es: 'App en Flutter para descubrir películas y series con datos de TMDB: autenticación segura, códigos QR geolocalizados en mapa, historial de escaneos y notificaciones push con Firebase.',
-      en: 'Flutter app to discover movies and shows with TMDB data: secure auth, geolocated QR codes on a map, scan history and push notifications with Firebase.'
+      es: 'Plataforma tipo LeetCode: registro de usuarios, envío de soluciones y evaluación automática en Python, Java y Ruby contra casos de prueba, con historial de soluciones.',
+      en: 'LeetCode-style platform: user accounts, solution submissions and automatic grading in Python, Java and Ruby against test cases, with a solution history.'
     },
-    etiquetas: ['Flutter', 'Dart', 'Firebase', 'TMDB']
+    etiquetas: ['Python', 'Flask', 'PostgreSQL']
   }
 ]
 

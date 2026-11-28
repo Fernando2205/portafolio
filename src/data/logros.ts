@@ -94,6 +94,18 @@ export const LOGROS: Logro[] = [
     resultado: { es: 'Publicación', en: 'Publication' },
     url: 'https://ieeexplore.ieee.org/document/11214607',
     descripcion: igual('“Evaluating Memoized Dynamic Programming and Greedy Best-First Search for Simulation-to-Real Mobile Robot Path Planning”.')
+  },
+  {
+    anio: '2025',
+    tipo: 'talk',
+    titulo: 'STEAM FEST 2025',
+    evento: igual('Fundación Mayagüez · Candelaria, Valle del Cauca'),
+    resultado: { es: 'Expositor', en: 'Exhibitor' },
+    url: 'https://cubecomunicaciones.com/steam-fest-2025-impulsando-la-educacion-en-ciencia-y-tecnologia-en-el-valle-del-cauca/',
+    descripcion: {
+      es: 'Exposición, con el semillero DIDI 4.0, del proyecto de planificación de rutas para robots móviles publicado en IEEE.',
+      en: 'Exhibited, with the DIDI 4.0 research group, the mobile robot path planning project published at IEEE.'
+    }
   }
 ]
 

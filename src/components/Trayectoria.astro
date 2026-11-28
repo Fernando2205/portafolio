@@ -11,7 +11,7 @@ const lang = getLang(Astro.url)
 const dic = t(lang)
 
 /*
-  Se renderizan los tres grupos y el filtro lo hace CSS a partir de
+  Se renderizan todos los grupos y el filtro lo hace CSS a partir de
   `data-filtro`: así no hay parpadeo al cargar, el contenido completo está en
   el HTML para SEO y sin JavaScript se ven todos los items.
 */
@@ -111,7 +111,7 @@ const columnaNodo = 'calc(clamp(72px,12vw,140px) + clamp(16px,3vw,40px) + 7px)'
                   data-cursor={dic.cursor.ver}
                   class="text-acct"
                 >
-                  {`${dic.trayectoria.credencial} ↗`}
+                  {`${item.textoEnlace?.[lang] ?? dic.trayectoria.credencial} ↗`}
                 </a>
               )}
             </div>

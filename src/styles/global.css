@@ -182,10 +182,11 @@ html[data-tema='light'] [data-cuando-claro] {
 
 /*
   Pestañas de la trayectoria. El filtro se resuelve con CSS para que no haya
-  parpadeo al cargar y para que el HTML lleve siempre los tres grupos.
+  parpadeo al cargar y para que el HTML lleve siempre todos los grupos.
 */
 [data-filtro='work'] [data-ti]:not([data-tipo='work']),
 [data-filtro='edu'] [data-ti]:not([data-tipo='edu']),
+[data-filtro='research'] [data-ti]:not([data-tipo='research']),
 [data-filtro='cert'] [data-ti]:not([data-tipo='cert']) {
   display: none;
 }

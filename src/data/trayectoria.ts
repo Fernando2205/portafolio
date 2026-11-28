@@ -1,6 +1,6 @@
 import type { Localizado } from '../i18n/tipos'
 
-export type TipoTrayectoria = 'work' | 'edu' | 'cert'
+export type TipoTrayectoria = 'work' | 'edu' | 'research' | 'cert'
 
 export interface ItemTrayectoria {
   anio: string
@@ -10,18 +10,20 @@ export interface ItemTrayectoria {
   detalle: Localizado<string[]>
   /** Credencial verificable. Vacío = no se muestra el enlace. */
   url?: string
+  /** Texto del enlace, si no es una credencial (p. ej. la web del semillero). */
+  textoEnlace?: Localizado
 }
 
-export const ETIQUETAS_TIPO: Record<TipoTrayectoria | 'all' | 'research', Localizado> = {
+export const ETIQUETAS_TIPO: Record<TipoTrayectoria | 'all', Localizado> = {
   all: { es: 'todo', en: 'all' },
   work: { es: 'experiencia', en: 'experience' },
   edu: { es: 'educación', en: 'education' },
-  cert: { es: 'certificación', en: 'certification' },
-  research: { es: 'investigación', en: 'research' }
+  research: { es: 'investigación', en: 'research' },
+  cert: { es: 'certificación', en: 'certification' }
 }
 
 /** Orden de las pestañas de la sección. */
-export const TIPOS_TRAYECTORIA: TipoTrayectoria[] = ['work', 'edu', 'cert']
+export const TIPOS_TRAYECTORIA: TipoTrayectoria[] = ['work', 'edu', 'research', 'cert']
 
 export const TRAYECTORIA: ItemTrayectoria[] = [
   {
@@ -55,6 +57,27 @@ export const TRAYECTORIA: ItemTrayectoria[] = [
         'Workflow automations with n8n that streamline internal processes and cut operating time.',
         'AI agents for document management that combine language models and OCR to classify and extract information.',
         'Corporate projects with multidisciplinary teams and deliveries aligned with strategic goals.'
+      ]
+    }
+  },
+  {
+    anio: '2025',
+    tipo: 'research',
+    titulo: 'Semillero DIDI 4.0',
+    url: 'https://lidis.usbcali.edu.co/didi/',
+    textoEnlace: { es: 'ver semillero', en: 'view research group' },
+    subtitulo: {
+      es: 'Universidad de San Buenaventura Cali · Diseño, Interacción y Desarrollo en la Industria 4.0',
+      en: 'Universidad de San Buenaventura Cali · Design, Interaction and Development in Industry 4.0'
+    },
+    detalle: {
+      es: [
+        'Investigación en inteligencia artificial, visión por computador, algoritmos y robótica.',
+        'Participo en proyectos de investigación aplicada, desde el desarrollo hasta su divulgación en publicaciones y eventos académicos.'
+      ],
+      en: [
+        'Research in artificial intelligence, computer vision, algorithms and robotics.',
+        'I take part in applied research projects, from development to dissemination in publications and academic events.'
       ]
     }
   },

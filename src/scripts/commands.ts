@@ -221,7 +221,7 @@ export function crearInterprete (consola: Consola) {
       case 'experiencia':
       case 'experience':
         salida = TRAYECTORIA
-          .filter(item => item.tipo === 'work' || item.tipo === 'edu')
+          .filter(item => item.tipo !== 'cert')
           .map(item => o(`  ${item.anio.padEnd(8)} ${item.titulo} — ${item.subtitulo[lang]}`))
         window.setTimeout(() => irA('trayectoria'), 300)
         break
